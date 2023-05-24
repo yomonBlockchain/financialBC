@@ -2,7 +2,7 @@ import React from "react";
 import AppPresenter from "./AppPresenter";
 import "./css/style.css";
 
-const AppContainer = () => {
+const AppContainer = (props) => {
   return <AppPresenter />;
 };
 
