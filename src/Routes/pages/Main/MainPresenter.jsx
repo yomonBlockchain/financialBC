@@ -5,7 +5,7 @@ import Creatives from "../../../Components/Creatives";
 const MainPresenter = () => {
   return (
     <div className="mt80">
-      <Carousel title="Trending Collections" />
+      <Carousel title="NFT List" />
       <Creatives />
     </div>
   );
