@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PostAuthor01 from "../assets/images/blog-author-01.jpg";
 import PostAuthor02 from "../assets/images/blog-author-02.jpg";
 import PostAuthor03 from "../assets/images/blog-author-03.jpg";
@@ -7,7 +7,7 @@ import PostAuthor05 from "../assets/images/blog-author-05.jpg";
 import Swiper, { Navigation } from "swiper";
 import "swiper/swiper.min.css";
 import SwiperImg from "./Swiper/SwiperImg";
-import { Web3Context } from "../utils/WalletContext";
+import contractCall from "../utils/ContractCall";
 
 Swiper.use([Navigation]);
 
@@ -20,7 +20,8 @@ const avatars = [
 ];
 
 const Carousel = (props) => {
-  const { contract, loadNFT } = useContext(Web3Context);
+  const nft = contractCall.loadNFT();
+
   const [nftList, setNftList] = useState([]);
   const { title = "" } = props;
 
@@ -52,18 +53,9 @@ const Carousel = (props) => {
   }, []);
 
   useEffect(() => {
-    const latestNftList = async () => {
-      if (window.ethereum) {
-        const list = await loadNFT();
-        setNftList(list);
-      }
-    };
-    if (contract) {
-      latestNftList();
-    }
+    setNftList(nft);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [contract]);
-  console.log(nftList);
+  }, []);
 
   return (
     <section className="bg-gray-800">
@@ -73,8 +65,6 @@ const Carousel = (props) => {
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
             <h2 className="h2 font-cabinet-grotesk text-gray-100">{title}</h2>
           </div>
-          {/* Carousel built with Swiper.js [https://swiperjs.com/] */}
-          {/* * Custom styles in src/css/additional-styles/theme.scss */}
           <div className="carousel swiper-container max-w-sm mx-auto sm:max-w-none ">
             <div className="swiper-wrapper">
               {/* Carousel items */}

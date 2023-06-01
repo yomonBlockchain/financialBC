@@ -1,16 +1,37 @@
-import Web3 from "web3";
-import tokenAbi from "../Abi/MyToken.json";
-const rpcEndpoint = `https://sepolia.infura.io/v3/${process.env.REACT_APP_INFURA_APIKEY}`;
-const web3 = new Web3(rpcEndpoint);
-const tokenContractAddress = "0x73E748EE9d02ad00FE766dBe0117E466FfBc8feF";
-const tokenContract = new web3.eth.Contract(tokenAbi, tokenContractAddress);
+/* eslint-disable react-hooks/rules-of-hooks */
+import { useContractRead } from "wagmi";
+import { tokenAbi } from "../Abi/tokenAbi";
 
-console.log(tokenContract);
+const contractInfo = {
+  address: "0x80dBe94a426600721fb0190DFbC4b43A72BD7d81",
+  abi: tokenAbi,
+  chainId: 11155111,
+};
 
 const contractCall = {
-  getNftInfo: async (tokenId) => {
-    const tokenInfo = await tokenContract.methods.getTokenInfo(tokenId).call();
-    return tokenInfo;
+  getNftInfo: (tokenId) => {
+    const { data } = useContractRead({
+      ...contractInfo,
+      functionName: "getTokenInfo",
+      args: [tokenId],
+    });
+
+    return data;
+  },
+  getTotalMintCount: () => {
+    const { data } = useContractRead({
+      ...contractInfo,
+      functionName: "getTotalMintCount",
+    });
+    return data;
+  },
+  loadNFT: () => {
+    let nftTotalSuffly = contractCall.getTotalMintCount();
+    const nftList = [...new Array(Number(nftTotalSuffly))].map((_, idx) => {
+      const nftInfo = contractCall.getNftInfo(idx);
+      return nftInfo;
+    });
+    return nftList;
   },
 };
 

@@ -1,7 +1,7 @@
 // eslint-disable-next-line react/prop-types
 
 const SwiperImg = ({ Carousel, avatar }) => {
-  const { uri, name, description } = Carousel;
+  const [name, description, uri] = Carousel;
   return (
     <div className="swiper-slide h-auto flex flex-col">
       {/* img */}
@@ -23,27 +23,6 @@ const SwiperImg = ({ Carousel, avatar }) => {
             height={36}
             alt="Avatar 01"
           />
-          {/* <img
-            className="rounded-full border-2 border-white box-content"
-            src={Avatar02}
-            width={36}
-            height={36}
-            alt="Avatar 02"
-          />
-          <img
-            className="rounded-full border-2 border-white box-content"
-            src={Avatar03}
-            width={36}
-            height={36}
-            alt="Avatar 03"
-          />
-          <img
-            className="rounded-full border-2 border-white box-content"
-            src={Avatar04}
-            width={36}
-            height={36}
-            alt="Avatar 04"
-          /> */}
         </div>
         {/* Title */}
         <a

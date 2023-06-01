@@ -4,7 +4,7 @@ import Creatives from "../../../Components/Creatives";
 
 const MainPresenter = () => {
   return (
-    <div className="mt80">
+    <div className="mt-20">
       <Carousel title="NFT List" />
       <Creatives />
     </div>
