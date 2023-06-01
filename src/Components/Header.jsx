@@ -47,23 +47,19 @@ const Header = () => {
               </ul>
             ) : (
               <ul className="flex grow justify-end flex-wrap items-center">
-                {connectors.map((connector) => {
-                  console.log(connector);
-                  return (
-                    <li key={connector.id}>
-                      <div
-                        className="font-medium text-gray-600 decoration-blue-500 decoration-2 underline-offset-2 hover:underline px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out"
-                        to="/signin"
-                        onClick={() => connect({ connector })}
-                      >
-                        Sign in
-                        {isLoading &&
-                          pendingConnector?.id === connector.id &&
-                          `connecting`}
-                      </div>
-                    </li>
-                  );
-                })}
+                <li>
+                  <div
+                    className="font-medium text-gray-600 decoration-blue-500 decoration-2 underline-offset-2 hover:underline px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out"
+                    to="/signin"
+                    onClick={() => connect({ connector: connectors[0] })}
+                  >
+                    Sign in
+                    {isLoading &&
+                      pendingConnector?.id === connectors[0].id &&
+                      `connecting`}
+                  </div>
+                </li>
+
                 <li className="ml-3">
                   <Link
                     className="btn-sm text-white bg-blue-500 hover:bg-blue-600 w-full shadow-sm"
