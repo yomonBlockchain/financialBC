@@ -8,6 +8,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@wagmi/core": "^1.0.7",
     "@web3-react/core": "^8.2.0",
     "@web3-react/injected-connector": "^6.0.7",
     "dotenv": "^16.0.3",
@@ -16,6 +17,8 @@
     "react-router-dom": "^6.11.2",
     "react-scripts": "5.0.1",
     "swiper": "^9.3.2",
+    "viem": "^0.3.41",
+    "wagmi": "^1.0.7",
     "web-vitals": "^2.1.4",
     "web3": "^1.10.0"
   },

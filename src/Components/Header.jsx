@@ -1,15 +1,14 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
 import LOGO from "../assets/logo.png";
-import { Web3Context } from "../utils/WalletContext";
+import { useAccount, useConnect, useDisconnect } from "wagmi";
 
 const Header = () => {
   /* Router */
   // const navigate = useNavigate();
   /* State */
-  // eslint-disable-next-line no-unused-vars
-  const { web3, accounts, isLogin, handleConnect } = useContext(Web3Context);
-  console.log(web3, accounts);
+  const { isConnected, address } = useAccount();
+  const { connect, connectors, isLoading, pendingConnector } = useConnect();
+  const { disconnect } = useDisconnect();
   /* Hooks */
   /* Render */
   return (
@@ -27,34 +26,50 @@ const Header = () => {
           {/* Desktop navigation */}
           <nav className="flex grow">
             {/* Desktop sign in links */}
-            {isLogin ? (
+            {isConnected ? (
               <ul className="flex grow justify-end flex-wrap items-center">
                 <li>
                   <div
                     className="btn-sm text-white bg-blue-500 hover:bg-blue-600 w-full shadow-sm"
                     to="/signin"
                   >
-                    {accounts[0]}
+                    {address}
+                  </div>
+                </li>
+                <li>
+                  <div
+                    className="font-medium text-gray-600 decoration-blue-500 decoration-2 underline-offset-2 hover:underline px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out"
+                    onClick={() => disconnect()}
+                  >
+                    Logout
                   </div>
                 </li>
               </ul>
             ) : (
               <ul className="flex grow justify-end flex-wrap items-center">
-                <li>
-                  <div
-                    className="font-medium text-gray-600 decoration-blue-500 decoration-2 underline-offset-2 hover:underline px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out"
-                    to="/signin"
-                    onClick={handleConnect}
-                  >
-                    Sign in
-                  </div>
-                </li>
+                {connectors.map((connector) => {
+                  console.log(connector);
+                  return (
+                    <li key={connector.id}>
+                      <div
+                        className="font-medium text-gray-600 decoration-blue-500 decoration-2 underline-offset-2 hover:underline px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out"
+                        to="/signin"
+                        onClick={() => connect({ connector })}
+                      >
+                        Sign in
+                        {isLoading &&
+                          pendingConnector?.id === connector.id &&
+                          `connecting`}
+                      </div>
+                    </li>
+                  );
+                })}
                 <li className="ml-3">
                   <Link
                     className="btn-sm text-white bg-blue-500 hover:bg-blue-600 w-full shadow-sm"
                     to={{ pathname: "/signup" }}
                   >
-                    Join The Community
+                    Join
                   </Link>
                 </li>
               </ul>

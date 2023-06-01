@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { MainLayout } from "../Layout";
-import { Main } from "./pages";
+import { Main, Signup } from "./pages";
 
 const IndexRouter = () => {
   return (
@@ -8,6 +8,7 @@ const IndexRouter = () => {
       <Route element={<MainLayout />}>
         <Route path="/" element={<Main />} />
       </Route>
+      <Route path="/signup" element={<Signup />} />
     </Routes>
   );
 };
