@@ -27,10 +27,12 @@ const contractCall = {
   },
   loadNFT: () => {
     let nftTotalSuffly = contractCall.getTotalMintCount();
-    const nftList = [...new Array(Number(nftTotalSuffly))].map((_, idx) => {
-      const nftInfo = contractCall.getNftInfo(idx);
-      return nftInfo;
-    });
+    const nftList =
+      nftTotalSuffly &&
+      [...new Array(Number(nftTotalSuffly))].map((_, idx) => {
+        const nftInfo = contractCall.getNftInfo(idx);
+        return nftInfo;
+      });
     return nftList;
   },
 };

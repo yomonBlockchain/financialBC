@@ -1,0 +1,71 @@
+.overlaybox {
+  position: relative;
+  width: 280px;
+  height: 170px;
+  background-image: url("../assets/images/Group_Info.png");
+  background-repeat: no-repeat;
+  padding: 20px 10px;
+}
+
+.overlaybox .group-name {
+  margin-left: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.overlaybox .group-name > h3,
+.overlaybox .end-point > h3,
+.overlaybox .start-point > h3 {
+  margin: 0px 0px 0px 10px;
+}
+.overlaybox .start-point {
+  margin-left: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+.overlaybox .end-point {
+  margin-left: 20px;
+  display: flex;
+  font-size: 16px;
+  align-items: center;
+}
+
+.start-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e8f9ee;
+  margin-bottom: 2px;
+}
+.color {
+  color: #0ebc93;
+}
+
+.end-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e5e5fe;
+  margin-top: 2px;
+}
+
+.end-color {
+  color: #5932ea;
+}
+
+.overlaybox div,
+ul {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
