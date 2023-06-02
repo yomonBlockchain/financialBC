@@ -1,0 +1,94 @@
+.patrol-list-container {
+  width: 450px;
+  height: 100%;
+  /* overflow: auto; */
+  position: absolute;
+  z-index: 80;
+  background-color: rgba(255, 255, 255, 0.7);
+  transition: all 0.5s;
+}
+
+.patrol-content {
+  width: 450px;
+  height: 88%;
+  z-index: 81;
+  overflow: auto;
+  transition: all 1s;
+}
+
+.patrol-list-container .mouse-over-event {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  background-color: #fff;
+  box-shadow: 3px 3px 6px 1px rgb(0 0 0 / 20%);
+  top: 8%;
+  left: 100%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.5s;
+  z-index: 100;
+}
+
+.patrol-list-container .search-container {
+  width: 90%;
+  margin: 20px;
+  white-space: nowrap;
+  background-color: #fff;
+  border: 1px solid #eceef7;
+  border-radius: 12px;
+  position: relative;
+  box-shadow: 0px 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+.patrol-list-container .search-container input#search {
+  width: 90%;
+  height: 50px;
+  font-size: 16px;
+  border: none;
+  background-color: #fff;
+  padding: 10px 20px;
+  border-radius: 12px;
+}
+
+.patrol-list-container .search-container input#search:hover,
+.patrol-list-container .search-container input#search:focus {
+  outline: none;
+}
+
+.patrol-list-container .search-container .search-btn {
+  position: absolute;
+  border: none;
+  background-color: #fff;
+  transform: translate(-50%, -50%);
+  right: 0;
+  top: 50%;
+  cursor: pointer;
+}
+
+.patrol-list-container .patrol-status-container {
+  width: 90%;
+  margin: 0px 20px 0px 20px;
+  padding-bottom: 10px;
+}
+.patrol-list-container .patrol-status-container > h2 {
+  margin-top: 10px;
+}
+
+/* input search X 버튼 제거 */
+/* IE의 경우 */
+input::-ms-clear,
+input::-ms-reveal {
+  display: none;
+}
+/* 크롬의 경우 */
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration {
+  display: none;
+}
