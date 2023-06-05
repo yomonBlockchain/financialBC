@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 
@@ -17,10 +17,18 @@ const SignupPresenter = () => {
   const { connect, connectors } = useConnect();
   const { disconnect } = useDisconnect();
   /* Hooks */
+  useEffect(() => {
+    if (address) {
+      setUserInfo({ ...userInfo, user_addr: address });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [address]);
+
   /* Functions */
   const handleUserInfo = (e) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
   };
+  console.log(userInfo);
   const handleWalletCall = () => {
     if (address) {
       disconnect();
@@ -106,12 +114,13 @@ const SignupPresenter = () => {
                         Wallet Address
                       </label>
                       <input
-                        id="wallet_address"
+                        id="user_addr"
                         type="text"
                         className="form-input w-full
                       bg-slate-100 text-gray-500"
                         disabled
                         defaultValue={address ? address : ""}
+                        onChange={handleUserInfo}
                       />
                     </div>
                   </div>

@@ -35,6 +35,39 @@ const contractCall = {
       });
     return nftList;
   },
+  loadNFTbyAddress: (address) => {
+    try {
+      let tokenIds = [];
+      const { data } = useContractRead({
+        ...contractInfo,
+        functionName: "getTotalMintCount",
+      });
+      // 현재 로그인된 계정이 소유한 tokenId 저장
+      [...new Array(Number(data))].map((_, idx) => {
+        const addr = contractCall.getOwnerOf(idx);
+        if (addr === address) {
+          tokenIds.push(idx);
+        }
+      });
+      if (tokenIds.length > 0) {
+        const result = tokenIds.map((i) => contractCall.getNftInfo(i));
+        return result;
+      } else {
+        return;
+      }
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  },
+  getOwnerOf: (tokenId) => {
+    const { data } = useContractRead({
+      ...contractInfo,
+      functionName: "ownerOf",
+      args: [tokenId],
+    });
+    return data;
+  },
 };
 
 export default contractCall;
