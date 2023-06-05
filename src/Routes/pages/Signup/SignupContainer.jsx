@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AuthAPI } from '../../../API';
 import { setCookie } from '../../../utils';
 import SignupPresenter from './SignupPresenter';
 
 const SignupContainer = () => {
   const navigate = useNavigate();
-  const { signup_id } = useParams();
   const initialState = {
     user_id: '',
     user_pw: '',
@@ -62,11 +61,7 @@ const SignupContainer = () => {
   };
 
   /* Hooks */
-  useEffect(() => {
-    if (signup_id) {
-      handleSignupInfo();
-    }
-  }, [userInfo, signup_id, handleSignupInfo]);
+  useEffect(() => {}, [userInfo]);
 
   return (
     <SignupPresenter
@@ -74,7 +69,6 @@ const SignupContainer = () => {
       handleUserInfo={handleUserInfo}
       setUserInfo={setUserInfo}
       userInfo={userInfo}
-      signup_id={signup_id}
     />
   );
 };

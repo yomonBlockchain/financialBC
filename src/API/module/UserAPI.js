@@ -2,7 +2,7 @@ import { APIManager } from '../../utils';
 import APIConstant from '../APIConstant';
 const $http = new APIManager();
 
-const UserApi = {
+const UserAPI = {
   /**
    * 유저 상세정보 조회
    * --
@@ -24,4 +24,4 @@ const UserApi = {
   },
 };
 
-export default UserApi;
+export default UserAPI;
