@@ -43,6 +43,7 @@ const contractCall = {
         functionName: "getTotalMintCount",
       });
       // 현재 로그인된 계정이 소유한 tokenId 저장
+      // eslint-disable-next-line
       [...new Array(Number(data))].map((_, idx) => {
         const addr = contractCall.getOwnerOf(idx);
         if (addr === address) {

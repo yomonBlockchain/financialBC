@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useAccount } from "wagmi";
 import CREATIVE_BG from "../../../assets/images/creative-bg-01.jpg";
 import CREATIVE_AVATAR from "../../../assets/images/creative-01.jpg";
