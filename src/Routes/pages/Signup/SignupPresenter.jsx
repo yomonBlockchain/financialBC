@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 
@@ -9,7 +9,6 @@ const SignupPresenter = (props) => {
   const { address } = useAccount();
   const { connect, connectors } = useConnect();
   const { disconnect } = useDisconnect();
-
 
   const { userInfo, handleSignup, handleUserInfo, setUserInfo } = props;
   const { user_id, user_nm, user_pw, user_addr } = userInfo;
@@ -28,8 +27,6 @@ const SignupPresenter = (props) => {
     await handleSignup(userInfo);
   };
 
-
-
   console.log(userInfo);
 
   const handleWalletCall = () => {
@@ -45,6 +42,7 @@ const SignupPresenter = (props) => {
     if (address) {
       setUserInfo({ ...userInfo, user_addr: address });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [address]);
   /* Render */
   return (
@@ -131,14 +129,13 @@ const SignupPresenter = (props) => {
                         disabled
                         value={user_addr}
                         onChange={handleUserInfo}
-
                       />
                     </div>
                   </div>
                   <div className="flex flex-wrap items-center justify-between mt-6">
                     <div
                       className="font-medium text-sm sm:text-base text-blue-500 decoration-blue-500 decoration-2 underline-offset-2 hover:underline"
-                      onClick={() => navigate('/')}
+                      onClick={() => navigate("/")}
                     >
                       Go to Login
                     </div>
@@ -146,12 +143,12 @@ const SignupPresenter = (props) => {
                       <button
                         className={`btn-sm text-white ${
                           address
-                            ? 'bg-red-500'
-                            : 'bg-blue-500 hover:bg-blue-600'
+                            ? "bg-red-500"
+                            : "bg-blue-500 hover:bg-blue-600"
                         } shadow-sm`}
                         onClick={handleWalletCall}
                       >
-                        {address ? 'Disconnect' : 'Import Wallet'}
+                        {address ? "Disconnect" : "Import Wallet"}
                       </button>
                     </div>
                   </div>

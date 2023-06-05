@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import SideBar from "../../Components/SideBar";
 import "../../css/main.css";
 
 const MainLayout = () => {
   /* Router */
-  const navigate = useNavigate();
   /* State */
   const [hide, setHide] = useState(true);
   const [menuIcon, setMenuIcon] = useState("");
