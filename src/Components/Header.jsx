@@ -1,15 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LOGO from "../assets/logo.png";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 
 const Header = () => {
   /* Router */
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   /* State */
   const { isConnected, address } = useAccount();
   const { connect, connectors, isLoading, pendingConnector } = useConnect();
   const { disconnect } = useDisconnect();
   /* Hooks */
+  /* Functions */
+  const handleDisconnect = () => {
+    disconnect();
+    navigate("/");
+  };
   /* Render */
   return (
     <header className="absolute w-full z-30">
@@ -31,7 +36,7 @@ const Header = () => {
                 <li>
                   <div
                     className="btn-sm text-white bg-blue-500 hover:bg-blue-600 w-full shadow-sm"
-                    to="/signin"
+                    onClick={() => navigate("/mypage")}
                   >
                     {address}
                   </div>
@@ -39,7 +44,7 @@ const Header = () => {
                 <li>
                   <div
                     className="font-medium text-gray-600 decoration-blue-500 decoration-2 underline-offset-2 hover:underline px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out"
-                    onClick={() => disconnect()}
+                    onClick={handleDisconnect}
                   >
                     Logout
                   </div>

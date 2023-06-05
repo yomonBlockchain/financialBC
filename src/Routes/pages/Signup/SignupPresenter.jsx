@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAccount, useConnect, useDisconnect } from 'wagmi';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAccount, useConnect, useDisconnect } from "wagmi";
 
 const SignupPresenter = (props) => {
   /* Router */
@@ -10,14 +10,27 @@ const SignupPresenter = (props) => {
   const { connect, connectors } = useConnect();
   const { disconnect } = useDisconnect();
 
+
   const { userInfo, handleSignup, handleUserInfo, setUserInfo } = props;
   const { user_id, user_nm, user_pw, user_addr } = userInfo;
+
+  /* Hooks */
+  useEffect(() => {
+    if (address) {
+      setUserInfo({ ...userInfo, user_addr: address });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [address]);
 
   /* Functions */
   const handleSubmit = async (e) => {
     e.preventDefault();
     await handleSignup(userInfo);
   };
+
+
+
+  console.log(userInfo);
 
   const handleWalletCall = () => {
     if (address) {
@@ -117,6 +130,8 @@ const SignupPresenter = (props) => {
                       bg-slate-100 text-gray-500"
                         disabled
                         value={user_addr}
+                        onChange={handleUserInfo}
+
                       />
                     </div>
                   </div>
