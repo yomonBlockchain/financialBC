@@ -2,20 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 
-const SignupPresenter = () => {
+const SignupPresenter = (props) => {
   /* Router */
   /* State */
   const navigate = useNavigate();
-  const initialState = {
-    user_id: "",
-    user_pw: "",
-    user_nm: "",
-    user_addr: "",
-  };
-  const [userInfo, setUserInfo] = useState(initialState);
   const { address } = useAccount();
   const { connect, connectors } = useConnect();
   const { disconnect } = useDisconnect();
+
+
+  const { userInfo, handleSignup, handleUserInfo, setUserInfo } = props;
+  const { user_id, user_nm, user_pw, user_addr } = userInfo;
+
   /* Hooks */
   useEffect(() => {
     if (address) {
@@ -25,17 +23,29 @@ const SignupPresenter = () => {
   }, [address]);
 
   /* Functions */
-  const handleUserInfo = (e) => {
-    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await handleSignup(userInfo);
   };
+
+
+
   console.log(userInfo);
+
   const handleWalletCall = () => {
     if (address) {
       disconnect();
     }
     // await wallet.signIn();
     connect({ connector: connectors[0] });
+    address && setUserInfo({ ...userInfo, [user_addr]: address });
   };
+  /* Hooks */
+  useEffect(() => {
+    if (address) {
+      setUserInfo({ ...userInfo, user_addr: address });
+    }
+  }, [address]);
   /* Render */
   return (
     <div className="font-inter antialiased bg-white text-gray-800 tracking-tight`}">
@@ -73,7 +83,7 @@ const SignupPresenter = () => {
                         name="user_id"
                         type="text"
                         className="form-input w-full text-gray-800"
-                        defaultValue={userInfo.user_id ? userInfo.user_id : ""}
+                        value={user_id}
                         onChange={handleUserInfo}
                       />
                     </div>
@@ -88,7 +98,7 @@ const SignupPresenter = () => {
                         name="user_pw"
                         type="password"
                         className="form-input w-full text-gray-800"
-                        defaultValue={userInfo.user_pw ? userInfo.user_pw : ""}
+                        value={user_pw}
                         onChange={handleUserInfo}
                       />
                     </div>
@@ -103,7 +113,7 @@ const SignupPresenter = () => {
                         name="user_nm"
                         type="text"
                         className="form-input w-full text-gray-800"
-                        defaultValue={userInfo.user_nm ? userInfo.user_nm : ""}
+                        value={user_nm}
                         onChange={handleUserInfo}
                       />
                     </div>
@@ -119,15 +129,16 @@ const SignupPresenter = () => {
                         className="form-input w-full
                       bg-slate-100 text-gray-500"
                         disabled
-                        defaultValue={address ? address : ""}
+                        value={user_addr}
                         onChange={handleUserInfo}
+
                       />
                     </div>
                   </div>
                   <div className="flex flex-wrap items-center justify-between mt-6">
                     <div
                       className="font-medium text-sm sm:text-base text-blue-500 decoration-blue-500 decoration-2 underline-offset-2 hover:underline"
-                      onClick={() => navigate("/")}
+                      onClick={() => navigate('/')}
                     >
                       Go to Login
                     </div>
@@ -135,12 +146,12 @@ const SignupPresenter = () => {
                       <button
                         className={`btn-sm text-white ${
                           address
-                            ? "bg-red-500"
-                            : "bg-blue-500 hover:bg-blue-600"
+                            ? 'bg-red-500'
+                            : 'bg-blue-500 hover:bg-blue-600'
                         } shadow-sm`}
                         onClick={handleWalletCall}
                       >
-                        {address ? "Disconnect" : "Import Wallet"}
+                        {address ? 'Disconnect' : 'Import Wallet'}
                       </button>
                     </div>
                   </div>
@@ -153,7 +164,12 @@ const SignupPresenter = () => {
                   </div>
                   <div className="flex flex-wrap">
                     <div className="w-full">
-                      <button className="btn-sm text-white bg-[#1D9BF0] hover:bg-[#1A90DF] w-full relative flex items-center">
+                      <button
+                        id="submit"
+                        type="submit"
+                        className="btn-sm text-white bg-[#1D9BF0] hover:bg-[#1A90DF] w-full relative flex items-center"
+                        onClick={handleSubmit}
+                      >
                         Join
                       </button>
                     </div>
