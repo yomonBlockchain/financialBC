@@ -1,6 +1,6 @@
-import { AuthAPI } from '../../../API';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { AuthAPI } from '../../../API';
 import { setCookie } from '../../../utils';
 import SignupPresenter from './SignupPresenter';
 
@@ -29,57 +29,36 @@ const SignupContainer = () => {
   };
 
   /**
-   * 회원가입 정보 요청
-   * --
-   * @returns
-   */
-  const handleSignupInfo = useCallback(async () => {
-    const postData = {
-      admin_login_id: userInfo.user_id,
-      admin_login_pw: userInfo.user_pw,
-    };
-    const result = await AuthAPI.requestSignup(postData);
-    if (result) {
-      const { signup_nm } = result;
-      setUserInfo({
-        ...userInfo,
-        user_nm: signup_nm,
-        signup_id,
-      });
-    }
-  }, [signup_id, userInfo]);
-
-  /**
    * 회원가입 요청
    * --
    * @returns
    */
-  const handleSignup = async () => {
-    if (signup_id) {
-      if (
-        !userInfo.team_id ||
-        userInfo.team_id === '0' ||
-        !userInfo.user_password
-      ) {
-        return false;
-      }
-      const postData = {
-        user_email: userInfo.user_email,
-        user_nm: userInfo.user_nm,
-        team_id: userInfo.team_id,
-        user_password: userInfo.user_password,
+  const handleSignup = async (userInfo) => {
+    const signupData = {
+      guard_login_id: userInfo.user_id,
+      guard_login_pw: userInfo.user_pw,
+      guard_nm: userInfo.user_nm,
+      guard_ether_address: userInfo.user_addr,
+    };
+    const signupResult = await AuthAPI.requestSignup(signupData);
+    if (signupResult) {
+      console.log(signupResult);
+      const loginData = {
+        guard_login_id: userInfo.user_id,
+        guard_login_pw: userInfo.user_pw,
       };
-      const result = await AuthAPI.requestSignup(postData);
-
-      if (result) {
-        const { access_token, ...user } = result;
-        setCookie('ISGUARD', access_token);
-        setCookie('ISGUARD_USER', JSON.stringify(user));
+      console.log(loginData);
+      const loginResult = await AuthAPI.requestSignin(loginData);
+      if (loginResult) {
+        console.log(loginResult);
+        const { access_token, ...guard_id } = loginResult;
+        setCookie('Authorization', access_token);
+        setCookie('ISGUARD_USER', JSON.stringify(guard_id));
         navigate('/');
         return true;
       }
-      return false;
     }
+    return false;
   };
 
   /* Hooks */
@@ -87,12 +66,15 @@ const SignupContainer = () => {
     if (signup_id) {
       handleSignupInfo();
     }
-  }, [signup_id, handleSignupInfo]);
+  }, [userInfo, signup_id, handleSignupInfo]);
 
   return (
     <SignupPresenter
       handleSignup={handleSignup}
       handleUserInfo={handleUserInfo}
+      setUserInfo={setUserInfo}
+      userInfo={userInfo}
+      signup_id={signup_id}
     />
   );
 };

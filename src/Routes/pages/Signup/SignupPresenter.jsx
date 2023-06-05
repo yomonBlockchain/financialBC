@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
 
@@ -9,13 +10,13 @@ const SignupPresenter = (props) => {
   const { connect, connectors } = useConnect();
   const { disconnect } = useDisconnect();
 
-  const { userInfo, handleSignup, handleUserInfo } = props;
-  const { user_id, user_nm, user_pw } = userInfo;
-  /* Hooks */
+  const { userInfo, handleSignup, handleUserInfo, setUserInfo } = props;
+  const { user_id, user_nm, user_pw, user_addr } = userInfo;
+
   /* Functions */
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await handleSignup();
+    await handleSignup(userInfo);
   };
 
   const handleWalletCall = () => {
@@ -24,7 +25,14 @@ const SignupPresenter = (props) => {
     }
     // await wallet.signIn();
     connect({ connector: connectors[0] });
+    address && setUserInfo({ ...userInfo, [user_addr]: address });
   };
+  /* Hooks */
+  useEffect(() => {
+    if (address) {
+      setUserInfo({ ...userInfo, user_addr: address });
+    }
+  }, [address]);
   /* Render */
   return (
     <div className="font-inter antialiased bg-white text-gray-800 tracking-tight`}">
@@ -51,7 +59,7 @@ const SignupPresenter = (props) => {
                     You've been invited by Mark Hooker to join Creative
                   </h1>
                 </div>
-                <form className="max-w-sm mx-auto" onSubmit={handleSubmit}>
+                <div className="max-w-sm mx-auto">
                   <div className="flex flex-wrap mb-4">
                     <div className="w-full">
                       <label className="block text-gray-500 text-sm font-medium mb-1">
@@ -62,7 +70,7 @@ const SignupPresenter = (props) => {
                         name="user_id"
                         type="text"
                         className="form-input w-full text-gray-800"
-                        defaultValue={user_id ? user_id : ''}
+                        value={user_id}
                         onChange={handleUserInfo}
                       />
                     </div>
@@ -77,7 +85,7 @@ const SignupPresenter = (props) => {
                         name="user_pw"
                         type="password"
                         className="form-input w-full text-gray-800"
-                        defaultValue={user_pw ? user_pw : ''}
+                        value={user_pw}
                         onChange={handleUserInfo}
                       />
                     </div>
@@ -92,7 +100,7 @@ const SignupPresenter = (props) => {
                         name="user_nm"
                         type="text"
                         className="form-input w-full text-gray-800"
-                        defaultValue={user_nm ? user_nm : ''}
+                        value={user_nm}
                         onChange={handleUserInfo}
                       />
                     </div>
@@ -103,12 +111,12 @@ const SignupPresenter = (props) => {
                         Wallet Address
                       </label>
                       <input
-                        id="wallet_address"
+                        id="user_addr"
                         type="text"
                         className="form-input w-full
                       bg-slate-100 text-gray-500"
                         disabled
-                        defaultValue={address ? address : ''}
+                        value={user_addr}
                       />
                     </div>
                   </div>
@@ -145,12 +153,13 @@ const SignupPresenter = (props) => {
                         id="submit"
                         type="submit"
                         className="btn-sm text-white bg-[#1D9BF0] hover:bg-[#1A90DF] w-full relative flex items-center"
+                        onClick={handleSubmit}
                       >
                         Join
                       </button>
                     </div>
                   </div>
-                </form>
+                </div>
               </div>
             </div>
           </section>
