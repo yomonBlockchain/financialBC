@@ -1,6 +1,6 @@
-import { Route, Routes } from "react-router-dom";
-import { AdminLayout, MainLayout } from "../Layout";
-import { DashBoard, Main, Mypage, Patrol, Signup } from "./pages";
+import { Route, Routes } from 'react-router-dom';
+import { AdminLayout, MainLayout } from '../Layout';
+import { DashBoard, Group, Main, Mypage, Patrol, Signup } from './pages';
 
 const IndexRouter = () => {
   return (
@@ -10,6 +10,7 @@ const IndexRouter = () => {
         <Route path="/mypage" element={<Mypage />} />
       </Route>
       <Route path="/signup" element={<Signup />} />
+      <Route path="/group" element={<Group />} />
       <Route element={<AdminLayout />}>
         <Route path="/patrol" element={<Patrol />} />
         <Route path="/dashboard" element={<DashBoard />} />

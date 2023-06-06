@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function CreativesItem(props) {
   /* Router */
@@ -82,7 +83,9 @@ function CreativesItem(props) {
                 d="M11 5H7V1a1 1 0 0 0-2 0v4H1a1 1 0 0 0 0 2h4v4a1 1 0 0 0 2 0V7h4a1 1 0 0 0 0-2Z"
               />
             </svg>
-            Follow
+            <Link className="b" to={{ pathname: '/Group' }}>
+              Application
+            </Link>
           </a>
         </div>
       </div>

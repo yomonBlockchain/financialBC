@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
 
-const SignupPresenter = (props) => {
+const GroupPresenter = (props) => {
   /* Router */
   /* State */
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ const SignupPresenter = (props) => {
   const { connect, connectors } = useConnect();
   const { disconnect } = useDisconnect();
 
-  const { userInfo, handleSignup, handleUserInfo, setUserInfo } = props;
+  const { userInfo, handleGroup, handleUserInfo, setUserInfo } = props;
   const { user_id, user_nm, user_pw, user_addr } = userInfo;
 
   /* Hooks */
@@ -24,19 +24,9 @@ const SignupPresenter = (props) => {
   /* Functions */
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await handleSignup(userInfo);
+    await handleGroup(userInfo);
   };
 
-  console.log(userInfo);
-
-  const handleWalletCall = () => {
-    if (address) {
-      disconnect();
-    }
-    // await wallet.signIn();
-    connect({ connector: connectors[0] });
-    address && setUserInfo({ ...userInfo, [user_addr]: address });
-  };
   /* Hooks */
   useEffect(() => {
     if (address) {
@@ -67,14 +57,14 @@ const SignupPresenter = (props) => {
                     </svg>
                   </div>
                   <h1 className="h2 font-cabinet-grotesk">
-                    You've been invited by Mark Hooker to join Creative
+                    You can Create a Group and get Recruited.
                   </h1>
                 </div>
                 <div className="max-w-sm mx-auto">
                   <div className="flex flex-wrap mb-4">
                     <div className="w-full">
                       <label className="block text-gray-500 text-sm font-medium mb-1">
-                        User ID
+                        Group Name
                       </label>
                       <input
                         id="user_id"
@@ -89,7 +79,7 @@ const SignupPresenter = (props) => {
                   <div className="flex flex-wrap mb-4">
                     <div className="w-full">
                       <label className="block text-gray-500 text-sm font-medium mb-1">
-                        Password
+                        Group Member
                       </label>
                       <input
                         id="password"
@@ -104,7 +94,7 @@ const SignupPresenter = (props) => {
                   <div className="flex flex-wrap mb-4">
                     <div className="w-full">
                       <label className="block text-gray-500 text-sm font-medium mb-1">
-                        User Nickname
+                        Recruiting Capacity
                       </label>
                       <input
                         id="user_nm"
@@ -116,40 +106,12 @@ const SignupPresenter = (props) => {
                       />
                     </div>
                   </div>
-                  <div className="flex flex-wrap mb-4">
-                    <div className="w-full">
-                      <label className="block text-gray-500 text-sm font-medium mb-1">
-                        Wallet Address
-                      </label>
-                      <input
-                        id="user_addr"
-                        type="text"
-                        className="form-input w-full
-                      bg-slate-100 text-gray-500"
-                        disabled
-                        value={user_addr}
-                        onChange={handleUserInfo}
-                      />
-                    </div>
-                  </div>
                   <div className="flex flex-wrap items-center justify-between mt-6">
                     <div
                       className="font-medium text-sm sm:text-base text-blue-500 decoration-blue-500 decoration-2 underline-offset-2 hover:underline"
                       onClick={() => navigate('/')}
                     >
-                      Go to Login
-                    </div>
-                    <div className="ml-2">
-                      <button
-                        className={`btn-sm text-white ${
-                          address
-                            ? 'bg-red-500'
-                            : 'bg-blue-500 hover:bg-blue-600'
-                        } shadow-sm`}
-                        onClick={handleWalletCall}
-                      >
-                        {address ? 'Disconnect' : 'Import Wallet'}
-                      </button>
+                      Go to main
                     </div>
                   </div>
 
@@ -167,7 +129,7 @@ const SignupPresenter = (props) => {
                         className="btn-sm text-white bg-[#1D9BF0] hover:bg-[#1A90DF] w-full relative flex items-center"
                         onClick={handleSubmit}
                       >
-                        Join
+                        Create Group
                       </button>
                     </div>
                   </div>
@@ -181,4 +143,4 @@ const SignupPresenter = (props) => {
   );
 };
 
-export default SignupPresenter;
+export default GroupPresenter;

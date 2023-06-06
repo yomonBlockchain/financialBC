@@ -1,24 +1,70 @@
-import CreativesImage from "../assets/images/creatives.jpg";
-import Creative01 from "../assets/images/creative-01.jpg";
-import Creative02 from "../assets/images/creative-02.jpg";
-import Creative03 from "../assets/images/creative-03.jpg";
-import Creative04 from "../assets/images/creative-04.jpg";
-import CreativeBg01 from "../assets/images/creative-bg-01.jpg";
-import CreativeBg02 from "../assets/images/creative-bg-02.jpg";
-import CreativeBg03 from "../assets/images/creative-bg-03.jpg";
-import CreativeBg04 from "../assets/images/creative-bg-04.jpg";
-import CreativesItem from "./Swiper/CreativesItem";
+import { useEffect, useState } from 'react';
+import { GroupAPI } from '../API';
+import Creative01 from '../assets/images/creative-01.jpg';
+import Creative02 from '../assets/images/creative-02.jpg';
+import Creative03 from '../assets/images/creative-03.jpg';
+import Creative04 from '../assets/images/creative-04.jpg';
+import CreativeBg01 from '../assets/images/creative-bg-01.jpg';
+import CreativeBg02 from '../assets/images/creative-bg-02.jpg';
+import CreativeBg03 from '../assets/images/creative-bg-03.jpg';
+import CreativeBg04 from '../assets/images/creative-bg-04.jpg';
+import CreativesImage from '../assets/images/creatives.jpg';
+import CreativesItem from './Swiper/CreativesItem';
 
 const Creatives = () => {
+  const [resultData, setResultData] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await GroupAPI.getGroupInfo();
+      setResultData(response);
+    };
+    fetchData();
+  }, []);
+  const groupNames = resultData.map((item) => item.group_name);
+  const groupMember = resultData.map((item) => item.group_member);
+
+  const dbData = [
+    {
+      id: 1,
+      BackSrc: CreativeBg01,
+      AuthSrc: Creative01,
+      Updown: true,
+      AuthName: groupNames[0],
+      AuthLink: groupMember[0],
+    },
+    {
+      id: 2,
+      BackSrc: CreativeBg02,
+      AuthSrc: Creative02,
+      Updown: false,
+      AuthName: groupNames[1],
+      AuthLink: groupMember[1],
+    },
+    {
+      id: 3,
+      BackSrc: CreativeBg03,
+      AuthSrc: Creative03,
+      Updown: true,
+      AuthName: groupNames[2],
+      AuthLink: groupMember[2],
+    },
+    {
+      id: 4,
+      BackSrc: CreativeBg04,
+      AuthSrc: Creative04,
+      Updown: false,
+      AuthName: groupNames[3],
+      AuthLink: groupMember[3],
+    },
+  ];
+  const filteredData = dbData.slice(0, 4);
   return (
     <section>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="py-12 md:py-20">
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
-            <h2 className="h2 font-cabinet-grotesk">
-              Look around various Artists
-            </h2>
+            <h2 className="h2 font-cabinet-grotesk">Recruiting Group</h2>
           </div>
           {/* Section content */}
           <div className="max-w-xl mx-auto md:max-w-none flex flex-col md:flex-row md:items-center space-y-8 md:space-y-0">
@@ -27,51 +73,35 @@ const Creatives = () => {
               <div className="flex space-x-6">
                 {/* Column 1 */}
                 <div className="w-1/2 space-y-6">
-                  {/* Item */}
-                  <CreativesItem
-                    data-aos="fade-down"
-                    BackSrc={CreativeBg01}
-                    AuthSrc={Creative01}
-                    Updown={true}
-                    AuthName="HanHo"
-                    AuthLink="hanho@islab.re.kr"
-                  />
-
-                  {/* Item */}
-                  <CreativesItem
-                    data-aos="fade-right"
-                    delay="200"
-                    BackSrc={CreativeBg02}
-                    AuthSrc={Creative02}
-                    Updown={false}
-                    AuthName="KyeongWoo"
-                    AuthLink="KyeongWoo@islab.re.kr"
-                  />
+                  {/* Map through filteredData */}
+                  {filteredData.slice(0, 2).map((item) => (
+                    <CreativesItem
+                      key={item.id}
+                      data-aos="fade-down"
+                      BackSrc={item.BackSrc}
+                      AuthSrc={item.AuthSrc}
+                      Updown={item.Updown}
+                      AuthName={item.AuthName}
+                      AuthLink={item.AuthLink}
+                    />
+                  ))}
                 </div>
 
                 {/* Column 2 */}
                 <div className="w-1/2 mt-6 space-y-6">
-                  {/* Item */}
-                  <CreativesItem
-                    data-aos="fade-left"
-                    delay="100"
-                    BackSrc={CreativeBg03}
-                    AuthSrc={Creative03}
-                    Updown={true}
-                    AuthName="Simon"
-                    AuthLink="simon@islab.re.kr"
-                  />
-
-                  {/* Item */}
-                  <CreativesItem
-                    data-aos="fade-up"
-                    delay="300"
-                    BackSrc={CreativeBg04}
-                    AuthSrc={Creative04}
-                    Updown={false}
-                    AuthName="BoGeum"
-                    AuthLink="BoGeum@islab.re.kr"
-                  />
+                  {/* Map through filteredData */}
+                  {filteredData.slice(2, 4).map((item) => (
+                    <CreativesItem
+                      key={item.id}
+                      data-aos="fade-up"
+                      delay="300"
+                      BackSrc={item.BackSrc}
+                      AuthSrc={item.AuthSrc}
+                      Updown={item.Updown}
+                      AuthName={item.AuthName}
+                      AuthLink={item.AuthLink}
+                    />
+                  ))}
                 </div>
               </div>
             </div>
@@ -86,17 +116,17 @@ const Creatives = () => {
                   alt="Creatives"
                 />
                 <h3 className="h3 font-cabinet-grotesk text-4xl mb-4">
-                  Best Artist
+                  Find Group
                 </h3>
                 <p className="text-xl text-gray-500 mb-6">
-                  They are not human. They are slave....
+                  Find Other Group Recruitment....
                 </p>
                 <div>
                   <div
                     className="btn text-white bg-blue-500 hover:bg-blue-600 shadow-sm"
                     href="/signup"
                   >
-                    See more Artist
+                    See more Group
                   </div>
                 </div>
               </div>
