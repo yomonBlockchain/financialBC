@@ -1,31 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GroupAPI } from '../../../API';
+import { getCookie } from '../../../utils';
 
-const GroupDetailPresenter = () => {
+const GroupDetailPresenter = ({ handleJoinGroup }) => {
   /* Router */
   /* State */
   const navigate = useNavigate();
   const [resultData, setResultData] = useState([]);
   /* Hooks */
   const parameter = useParams();
-  const groupID = {
-    group_id: parameter,
-  };
+  const { group_id } = parameter;
   useEffect(() => {
     const fetchData = async () => {
-      const response = await GroupAPI.getGroupInfo(groupID);
+      const response = await GroupAPI.getGroupDetail(group_id);
       setResultData(response);
     };
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const groupName = resultData.map((item) => item.group_name);
-  const groupLeader = resultData.map((item) => item.group_leader_id);
-  const groupMember = resultData.map((item) => item.group_member);
-  const RecruitmentStatus = resultData.map((item) => item.is_part)
-    ? 'Recruiting'
-    : 'Recruitment completed';
+  const {
+    group_name,
+    group_leader_id,
+    group_member,
+    keeper_id,
+    patrol_id,
+    is_part,
+  } = resultData;
+  const RecruitmentStatus = is_part ? 'Recruiting' : 'Recruitment completed';
+  const joinInfo = {
+    target_group_id: group_id,
+    guard_id: getCookie('User_name'),
+  };
+  const handleJoinCall = () => {
+    handleJoinGroup(joinInfo);
+  };
+
   /* Render */
   return (
     <div className="font-inter antialiased bg-white text-gray-800 tracking-tight`}">
@@ -58,7 +68,7 @@ const GroupDetailPresenter = () => {
                       <label className="block text-gray-500 text-sm font-medium mb-1">
                         Group Name
                       </label>
-                      {groupName}
+                      {group_name}
                     </div>
                   </div>
                   <div className="flex flex-wrap mb-4">
@@ -66,7 +76,23 @@ const GroupDetailPresenter = () => {
                       <label className="block text-gray-500 text-sm font-medium mb-1">
                         Group Leader
                       </label>
-                      {groupLeader}
+                      {group_leader_id}
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap mb-4">
+                    <div className="w-full">
+                      <label className="block text-gray-500 text-sm font-medium mb-1">
+                        Keeper
+                      </label>
+                      {keeper_id}
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap mb-4">
+                    <div className="w-full">
+                      <label className="block text-gray-500 text-sm font-medium mb-1">
+                        Patrol
+                      </label>
+                      {patrol_id}
                     </div>
                   </div>
                   <div className="flex flex-wrap mb-4">
@@ -74,7 +100,7 @@ const GroupDetailPresenter = () => {
                       <label className="block text-gray-500 text-sm font-medium mb-1">
                         groupMember
                       </label>
-                      {groupMember}
+                      {group_member}
                     </div>
                   </div>
                   <div className="flex flex-wrap mb-4">
@@ -106,6 +132,7 @@ const GroupDetailPresenter = () => {
                         id="submit"
                         type="submit"
                         className="btn-sm text-white bg-[#1D9BF0] hover:bg-[#1A90DF] w-full relative flex items-center"
+                        onClick={handleJoinCall}
                       >
                         Joining a Group
                       </button>

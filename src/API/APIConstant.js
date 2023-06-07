@@ -39,6 +39,11 @@ const GROUP_API = {
    * @param { string } group_id
    */
   GET_GROUPDETAIL: `${BASE_URL}/group/:group_id`,
+  /**
+   * @method PUT
+   * @param
+   */
+  JOIN_GROUP: `${BASE_URL}/group/join`,
 };
 
 const APIConstant = {
