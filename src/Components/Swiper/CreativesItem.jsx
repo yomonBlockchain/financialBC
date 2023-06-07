@@ -10,12 +10,12 @@ function CreativesItem(props) {
     BackSrc,
     AuthSrc,
     Updown,
+    GroupId,
     GroupName,
     GroupMember,
-    GroupId,
   } = props;
-  // console.log({ GroupMember });
-  // console.log({ GroupId });
+  console.log({ GroupMember });
+  console.log({ GroupId });
   //console.log({`/group/${GroupId}`});
   /* Hooks */
   /* Functions */

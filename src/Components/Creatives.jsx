@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { GroupAPI } from '../API';
 import Creative01 from '../assets/images/creative-01.jpg';
 import Creative02 from '../assets/images/creative-02.jpg';
@@ -62,7 +63,7 @@ const Creatives = () => {
       GroupId: groupId[3],
     },
   ];
-  // console.log(dbData);
+  console.log(dbData);
   const filteredData = dbData.slice(0, 4);
   return (
     <section>
@@ -87,9 +88,9 @@ const Creatives = () => {
                       BackSrc={item.BackSrc}
                       AuthSrc={item.AuthSrc}
                       Updown={item.Updown}
+                      GroupId={item.GroupId}
                       GroupName={item.GroupName}
                       GroupMember={item.GroupMember}
-                      GroupId={item.group_id}
                     />
                   ))}
                 </div>
@@ -105,9 +106,9 @@ const Creatives = () => {
                       BackSrc={item.BackSrc}
                       AuthSrc={item.AuthSrc}
                       Updown={item.Updown}
+                      GroupId={item.GroupId}
                       GroupName={item.GroupName}
                       GroupMember={item.GroupMember}
-                      GroupId={item.group_id}
                     />
                   ))}
                 </div>
@@ -134,7 +135,12 @@ const Creatives = () => {
                     className="btn text-white bg-blue-500 hover:bg-blue-600 shadow-sm"
                     href="/signup"
                   >
-                    See more Group
+                    <Link
+                      className="btn-sm text-white bg-blue-500 hover:bg-blue-600 w-full shadow-sm"
+                      to={{ pathname: '/group' }}
+                    >
+                      See more Group
+                    </Link>
                   </div>
                 </div>
               </div>
