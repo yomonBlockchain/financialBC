@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { GroupAPI } from '../API';
 import Creative01 from '../assets/images/creative-01.jpg';
 import Creative02 from '../assets/images/creative-02.jpg';
@@ -22,6 +23,7 @@ const Creatives = () => {
   }, []);
   const groupNames = resultData.map((item) => item.group_name);
   const groupMember = resultData.map((item) => item.group_member);
+  const groupId = resultData.map((item) => item.group_id);
 
   const dbData = [
     {
@@ -31,6 +33,7 @@ const Creatives = () => {
       Updown: true,
       GroupName: groupNames[0],
       GroupMember: groupMember[0],
+      GroupId: groupId[0],
     },
     {
       id: 2,
@@ -39,6 +42,7 @@ const Creatives = () => {
       Updown: false,
       GroupName: groupNames[1],
       GroupMember: groupMember[1],
+      GroupId: groupId[1],
     },
     {
       id: 3,
@@ -47,6 +51,7 @@ const Creatives = () => {
       Updown: true,
       GroupName: groupNames[2],
       GroupMember: groupMember[2],
+      GroupId: groupId[2],
     },
     {
       id: 4,
@@ -55,8 +60,10 @@ const Creatives = () => {
       Updown: false,
       GroupName: groupNames[3],
       GroupMember: groupMember[3],
+      GroupId: groupId[3],
     },
   ];
+  console.log(dbData);
   const filteredData = dbData.slice(0, 4);
   return (
     <section>
@@ -81,6 +88,7 @@ const Creatives = () => {
                       BackSrc={item.BackSrc}
                       AuthSrc={item.AuthSrc}
                       Updown={item.Updown}
+                      GroupId={item.GroupId}
                       GroupName={item.GroupName}
                       GroupMember={item.GroupMember}
                     />
@@ -98,6 +106,7 @@ const Creatives = () => {
                       BackSrc={item.BackSrc}
                       AuthSrc={item.AuthSrc}
                       Updown={item.Updown}
+                      GroupId={item.GroupId}
                       GroupName={item.GroupName}
                       GroupMember={item.GroupMember}
                     />
@@ -126,7 +135,12 @@ const Creatives = () => {
                     className="btn text-white bg-blue-500 hover:bg-blue-600 shadow-sm"
                     href="/signup"
                   >
-                    See more Group
+                    <Link
+                      className="btn-sm text-white bg-blue-500 hover:bg-blue-600 w-full shadow-sm"
+                      to={{ pathname: '/group' }}
+                    >
+                      See more Group
+                    </Link>
                   </div>
                 </div>
               </div>

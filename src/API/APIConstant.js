@@ -22,6 +22,11 @@ const AUTH_API = {
    * @param
    */
   REQUEST_SIGNIN: `${BASE_URL}/auth/guard/signIn`,
+  /**
+   * @method POST
+   * @param
+   */
+  REQUEST_SIGNINMM: `${BASE_URL}/auth/guard/signInmm`,
 };
 
 const GROUP_API = {
@@ -29,6 +34,11 @@ const GROUP_API = {
    * @method GET
    */
   GET_GROUPINFO: `${BASE_URL}/group`,
+  /**
+   * @method GET
+   * @param { string } group_id
+   */
+  GET_GROUPDETAIL: `${BASE_URL}/group/:group_id`,
 };
 
 const APIConstant = {
