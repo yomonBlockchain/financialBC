@@ -1,39 +1,11 @@
-import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAccount, useConnect, useDisconnect } from 'wagmi';
 
 const GroupPresenter = (props) => {
   /* Router */
   /* State */
   const navigate = useNavigate();
-  const { address } = useAccount();
-  const { connect, connectors } = useConnect();
-  const { disconnect } = useDisconnect();
-
-  const { userInfo, handleGroup, handleUserInfo, setUserInfo } = props;
-  const { user_id, user_nm, user_pw, user_addr } = userInfo;
 
   /* Hooks */
-  useEffect(() => {
-    if (address) {
-      setUserInfo({ ...userInfo, user_addr: address });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [address]);
-
-  /* Functions */
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await handleGroup(userInfo);
-  };
-
-  /* Hooks */
-  useEffect(() => {
-    if (address) {
-      setUserInfo({ ...userInfo, user_addr: address });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [address]);
   /* Render */
   return (
     <div className="font-inter antialiased bg-white text-gray-800 tracking-tight`}">
@@ -57,7 +29,7 @@ const GroupPresenter = (props) => {
                     </svg>
                   </div>
                   <h1 className="h2 font-cabinet-grotesk">
-                    You can Create a Group and get Recruited.
+                    This Group's Information
                   </h1>
                 </div>
                 <div className="max-w-sm mx-auto">
@@ -66,14 +38,7 @@ const GroupPresenter = (props) => {
                       <label className="block text-gray-500 text-sm font-medium mb-1">
                         Group Name
                       </label>
-                      <input
-                        id="user_id"
-                        name="user_id"
-                        type="text"
-                        className="form-input w-full text-gray-800"
-                        value={user_id}
-                        onChange={handleUserInfo}
-                      />
+                      dasdfasdf
                     </div>
                   </div>
                   <div className="flex flex-wrap mb-4">
@@ -81,14 +46,7 @@ const GroupPresenter = (props) => {
                       <label className="block text-gray-500 text-sm font-medium mb-1">
                         Group Member
                       </label>
-                      <input
-                        id="password"
-                        name="user_pw"
-                        type="password"
-                        className="form-input w-full text-gray-800"
-                        value={user_pw}
-                        onChange={handleUserInfo}
-                      />
+                      asdfasdfasdf
                     </div>
                   </div>
                   <div className="flex flex-wrap mb-4">
@@ -96,14 +54,7 @@ const GroupPresenter = (props) => {
                       <label className="block text-gray-500 text-sm font-medium mb-1">
                         Recruiting Capacity
                       </label>
-                      <input
-                        id="user_nm"
-                        name="user_nm"
-                        type="text"
-                        className="form-input w-full text-gray-800"
-                        value={user_nm}
-                        onChange={handleUserInfo}
-                      />
+                      opupoupou
                     </div>
                   </div>
                   <div className="flex flex-wrap items-center justify-between mt-6">
@@ -127,9 +78,8 @@ const GroupPresenter = (props) => {
                         id="submit"
                         type="submit"
                         className="btn-sm text-white bg-[#1D9BF0] hover:bg-[#1A90DF] w-full relative flex items-center"
-                        onClick={handleSubmit}
                       >
-                        Create Group
+                        Joining a Group
                       </button>
                     </div>
                   </div>

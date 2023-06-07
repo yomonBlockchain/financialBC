@@ -29,32 +29,32 @@ const Creatives = () => {
       BackSrc: CreativeBg01,
       AuthSrc: Creative01,
       Updown: true,
-      AuthName: groupNames[0],
-      AuthLink: groupMember[0],
+      GroupName: groupNames[0],
+      GroupMember: groupMember[0],
     },
     {
       id: 2,
       BackSrc: CreativeBg02,
       AuthSrc: Creative02,
       Updown: false,
-      AuthName: groupNames[1],
-      AuthLink: groupMember[1],
+      GroupName: groupNames[1],
+      GroupMember: groupMember[1],
     },
     {
       id: 3,
       BackSrc: CreativeBg03,
       AuthSrc: Creative03,
       Updown: true,
-      AuthName: groupNames[2],
-      AuthLink: groupMember[2],
+      GroupName: groupNames[2],
+      GroupMember: groupMember[2],
     },
     {
       id: 4,
       BackSrc: CreativeBg04,
       AuthSrc: Creative04,
       Updown: false,
-      AuthName: groupNames[3],
-      AuthLink: groupMember[3],
+      GroupName: groupNames[3],
+      GroupMember: groupMember[3],
     },
   ];
   const filteredData = dbData.slice(0, 4);
@@ -81,8 +81,8 @@ const Creatives = () => {
                       BackSrc={item.BackSrc}
                       AuthSrc={item.AuthSrc}
                       Updown={item.Updown}
-                      AuthName={item.AuthName}
-                      AuthLink={item.AuthLink}
+                      GroupName={item.GroupName}
+                      GroupMember={item.GroupMember}
                     />
                   ))}
                 </div>
@@ -98,8 +98,8 @@ const Creatives = () => {
                       BackSrc={item.BackSrc}
                       AuthSrc={item.AuthSrc}
                       Updown={item.Updown}
-                      AuthName={item.AuthName}
-                      AuthLink={item.AuthLink}
+                      GroupName={item.GroupName}
+                      GroupMember={item.GroupMember}
                     />
                   ))}
                 </div>

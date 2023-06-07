@@ -50,8 +50,9 @@ const SignupContainer = () => {
       const loginResult = await AuthAPI.requestSignin(loginData);
       if (loginResult) {
         console.log(loginResult);
-        const { access_token, ...guard_id } = loginResult;
+        const { access_token, guard_nm, ...guard_id } = loginResult;
         setCookie('Authorization', access_token);
+        setCookie('User_name', JSON.stringify(guard_nm));
         setCookie('ISGUARD_USER', JSON.stringify(guard_id));
         navigate('/');
         return true;
