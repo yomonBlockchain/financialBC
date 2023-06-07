@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { GroupAPI } from '../../../API';
 import { useNavigate } from 'react-router-dom';
 
 const GroupPresenter = () => {
@@ -12,13 +13,14 @@ const GroupPresenter = () => {
   };
   console.log(groupID);
   /* Hooks */
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const response = await GroupAPI.getGroupInfo(groupID);
-  //     setResultData(response);
-  //   };
-  //   fetchData();
-  // }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await GroupAPI.getGroupInfo(groupID);
+      setResultData(response);
+    };
+    fetchData();
+  }, []);
   // const groupNames = resultData.map((item) => item.group_name);
   // const groupMember = resultData.map((item) => item.group_member);
   /* Render */

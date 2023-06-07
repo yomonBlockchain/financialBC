@@ -62,7 +62,7 @@ const Creatives = () => {
       GroupId: groupId[3],
     },
   ];
-  console.log(dbData);
+  // console.log(dbData);
   const filteredData = dbData.slice(0, 4);
   return (
     <section>

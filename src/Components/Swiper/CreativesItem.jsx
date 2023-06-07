@@ -14,7 +14,8 @@ function CreativesItem(props) {
     GroupMember,
     GroupId,
   } = props;
-  console.log({ GroupId });
+  // console.log({ GroupMember });
+  // console.log({ GroupId });
   //console.log({`/group/${GroupId}`});
   /* Hooks */
   /* Functions */
