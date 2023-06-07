@@ -1,11 +1,26 @@
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const GroupPresenter = (props) => {
+const GroupPresenter = () => {
   /* Router */
   /* State */
   const navigate = useNavigate();
 
+  const [resultData, setResultData] = useState([]);
+  const groupID = {
+    group_id: window.location.href,
+  };
+  console.log(groupID);
   /* Hooks */
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await GroupAPI.getGroupInfo(groupID);
+  //     setResultData(response);
+  //   };
+  //   fetchData();
+  // }, []);
+  // const groupNames = resultData.map((item) => item.group_name);
+  // const groupMember = resultData.map((item) => item.group_member);
   /* Render */
   return (
     <div className="font-inter antialiased bg-white text-gray-800 tracking-tight`}">

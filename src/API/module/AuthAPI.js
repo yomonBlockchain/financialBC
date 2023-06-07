@@ -4,26 +4,6 @@ const $http = new APIManager();
 
 const AuthAPI = {
   /**
-   * 회원가입 정보 조회
-   * --
-   * @param {string} signup_id
-   * @returns
-   */
-  getSignup: async (signup_id) => {
-    try {
-      const url = APIConstant.GET_SIGNUP.replace(':signup_id', signup_id);
-      const result = await $http.get(url);
-      const { status, message, data } = result;
-      if (status === 200) {
-        return data;
-      }
-      throw message;
-    } catch (e) {
-      throw e;
-    }
-  },
-
-  /**
    * 회원가입 요청
    * --
    * @param {*} userInfo
@@ -43,7 +23,7 @@ const AuthAPI = {
     }
   },
   /**
-   * 로그인 요청
+   * ID와 PW로 로그인 요청
    * --
    * @param {*} userInfo
    * @returns
@@ -51,6 +31,26 @@ const AuthAPI = {
   requestSignin: async (userInfo) => {
     try {
       const url = APIConstant.REQUEST_SIGNIN;
+      const result = await $http.post(url, userInfo);
+      const { status, message, data } = result;
+      if (status === 200) {
+        return data;
+      }
+      throw message;
+    } catch (e) {
+      return false;
+    }
+  },
+
+  /**
+   * 메타마스크 주소로 로그인 요청
+   * --
+   * @param {*} userInfo
+   * @returns
+   */
+  requestSigninMM: async (userInfo) => {
+    try {
+      const url = APIConstant.REQUEST_SIGNINMM;
       const result = await $http.post(url, userInfo);
       const { status, message, data } = result;
       if (status === 200) {

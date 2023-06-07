@@ -22,6 +22,7 @@ const Creatives = () => {
   }, []);
   const groupNames = resultData.map((item) => item.group_name);
   const groupMember = resultData.map((item) => item.group_member);
+  const groupId = resultData.map((item) => item.group_id);
 
   const dbData = [
     {
@@ -31,6 +32,7 @@ const Creatives = () => {
       Updown: true,
       GroupName: groupNames[0],
       GroupMember: groupMember[0],
+      GroupId: groupId[0],
     },
     {
       id: 2,
@@ -39,6 +41,7 @@ const Creatives = () => {
       Updown: false,
       GroupName: groupNames[1],
       GroupMember: groupMember[1],
+      GroupId: groupId[1],
     },
     {
       id: 3,
@@ -47,6 +50,7 @@ const Creatives = () => {
       Updown: true,
       GroupName: groupNames[2],
       GroupMember: groupMember[2],
+      GroupId: groupId[2],
     },
     {
       id: 4,
@@ -55,8 +59,10 @@ const Creatives = () => {
       Updown: false,
       GroupName: groupNames[3],
       GroupMember: groupMember[3],
+      GroupId: groupId[3],
     },
   ];
+  console.log(dbData);
   const filteredData = dbData.slice(0, 4);
   return (
     <section>
@@ -83,6 +89,7 @@ const Creatives = () => {
                       Updown={item.Updown}
                       GroupName={item.GroupName}
                       GroupMember={item.GroupMember}
+                      GroupId={item.group_id}
                     />
                   ))}
                 </div>
@@ -100,6 +107,7 @@ const Creatives = () => {
                       Updown={item.Updown}
                       GroupName={item.GroupName}
                       GroupMember={item.GroupMember}
+                      GroupId={item.group_id}
                     />
                   ))}
                 </div>

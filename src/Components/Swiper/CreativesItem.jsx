@@ -12,7 +12,10 @@ function CreativesItem(props) {
     Updown,
     GroupName,
     GroupMember,
+    GroupId,
   } = props;
+  console.log({ GroupId });
+  //console.log({`/group/${GroupId}`});
   /* Hooks */
   /* Functions */
   /* Render */
@@ -83,7 +86,7 @@ function CreativesItem(props) {
                 d="M11 5H7V1a1 1 0 0 0-2 0v4H1a1 1 0 0 0 0 2h4v4a1 1 0 0 0 2 0V7h4a1 1 0 0 0 0-2Z"
               />
             </svg>
-            <Link className="b" to={`/group/`}>
+            <Link className="b" to={`/group/${GroupId}`}>
               Application
             </Link>
           </a>
