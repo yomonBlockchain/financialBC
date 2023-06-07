@@ -1,2 +1,2 @@
-export { default as UserAPI } from './module/UserAPI';
+export { default as GroupAPI } from './module/GroupAPI';
 export { default as AuthAPI } from './module/AuthAPI';

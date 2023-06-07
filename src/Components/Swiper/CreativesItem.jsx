@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function CreativesItem(props) {
   /* Router */
@@ -9,8 +10,8 @@ function CreativesItem(props) {
     BackSrc,
     AuthSrc,
     Updown,
-    AuthName,
-    AuthLink,
+    GroupName,
+    GroupMember,
   } = props;
   /* Hooks */
   /* Functions */
@@ -62,9 +63,9 @@ function CreativesItem(props) {
             className="inline-block font-cabinet-grotesk font-bold text-xl decoration-blue-500 decoration-2 underline-offset-2 hover:underline"
             href="#0"
           >
-            {AuthName}
+            {GroupName}
           </a>
-          <div className="text-sm font-medium text-gray-500">{AuthLink}</div>
+          <div className="text-sm font-medium text-gray-500">{GroupMember}</div>
         </div>
         <div>
           <a
@@ -82,7 +83,9 @@ function CreativesItem(props) {
                 d="M11 5H7V1a1 1 0 0 0-2 0v4H1a1 1 0 0 0 0 2h4v4a1 1 0 0 0 2 0V7h4a1 1 0 0 0 0-2Z"
               />
             </svg>
-            Follow
+            <Link className="b" to={`/group/`}>
+              Application
+            </Link>
           </a>
         </div>
       </div>

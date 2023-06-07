@@ -2,16 +2,15 @@ import { APIManager } from '../../utils';
 import APIConstant from '../APIConstant';
 const $http = new APIManager();
 
-const UserAPI = {
+const GroupAPI = {
   /**
    * 유저 상세정보 조회
    * --
-   * @param {string} user_id
    * @returns
    */
-  getUserInfo: async (user_id) => {
+  getGroupInfo: async () => {
     try {
-      const url = APIConstant.GET_USERINFO.replace(':user_id', user_id);
+      const url = APIConstant.GET_GROUPINFO;
       const result = await $http.get(url);
       const { status, message, data } = result;
       if (status === 200) {
@@ -24,4 +23,4 @@ const UserAPI = {
   },
 };
 
-export default UserAPI;
+export default GroupAPI;
