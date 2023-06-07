@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAccount, useConnect } from "wagmi";
 import metamaskLogo from "../../../assets/metamask.png";
-const SigninPresenter = ({ handleSigninUp }) => {
+const SigninPresenter = ({ handleSigninUp, handleMetamaskSignUp }) => {
   /* Router */
   /* State */
   const initialState = {
@@ -16,8 +16,13 @@ const SigninPresenter = ({ handleSigninUp }) => {
   /* Hooks */
   useEffect(() => {
     if (isConnected || address) {
+      const addr = {
+        guard_ether_address: address,
+      };
+      handleMetamaskSignUp(addr);
       navigate("/");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [address, isConnected, navigate]);
 
   /* Functions */

@@ -23,8 +23,27 @@ const SigninContainer = () => {
     }
     return false;
   };
+
+  const handleMetamaskSignUp = async (address) => {
+    const result = await AuthAPI.requestSigninMM(address);
+    console.log(result);
+    if (result) {
+      const { access_token, guard_nm, ...guard_id } = result;
+      setCookie("Authorization", access_token);
+      setCookie("User_name", JSON.stringify(guard_nm));
+      setCookie("ISGUARD_USER", JSON.stringify(guard_id));
+      navigate("/");
+      return true;
+    }
+    return false;
+  };
   /* Render */
-  return <SigninPresenter handleSigninUp={handleSigninUp} />;
+  return (
+    <SigninPresenter
+      handleSigninUp={handleSigninUp}
+      handleMetamaskSignUp={handleMetamaskSignUp}
+    />
+  );
 };
 
 export default SigninContainer;

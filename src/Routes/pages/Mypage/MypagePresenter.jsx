@@ -1,15 +1,17 @@
 import React from "react";
-import { useAccount } from "wagmi";
 import CREATIVE_BG from "../../../assets/images/creative-bg-01.jpg";
 import CREATIVE_AVATAR from "../../../assets/images/creative-01.jpg";
 import contractCall from "../../../utils/ContractCall";
+import { getCookie } from "../../../utils";
 
 const MypagePresenter = () => {
   /* Router */
   /* State */
+  const { guard_ether_address } = JSON.parse(getCookie("ISGUARD_USER"));
+  console.log(guard_ether_address);
   // const [nftList, setNftList] = useState("");
-  const { address } = useAccount();
-  const nftList = address && contractCall.loadNFTbyAddress(address);
+  const nftList =
+    guard_ether_address && contractCall.loadNFTbyAddress(guard_ether_address);
   /* Hooks */
   /* Functions */
   /* Render */
@@ -57,10 +59,11 @@ const MypagePresenter = () => {
             </div>
             <div className="mb-5">
               <div className="inline-block font-cabinet-grotesk font-bold text-xl decoration-blue-500 decoration-2 underline-offset-2 hover:underline">
-                {address ? address : ""} (이름으로 변경 필요)
+                {guard_ether_address ? guard_ether_address : ""} (이름으로 변경
+                필요)
               </div>
               <div className="text-sm font-medium text-gray-500">
-                @{address ? address : ""}
+                @{guard_ether_address ? guard_ether_address : ""}
               </div>
             </div>
           </div>
