@@ -1,6 +1,5 @@
-
-import { Route, Routes } from 'react-router-dom';
-import { AdminLayout, MainLayout } from '../Layout';
+import { Route, Routes } from "react-router-dom";
+import { AdminLayout, MainLayout } from "../Layout";
 import {
   DashBoard,
   Group,
@@ -8,8 +7,9 @@ import {
   Main,
   Mypage,
   Patrol,
+  Signin,
   Signup,
-} from './pages';
+} from "./pages";
 
 const IndexRouter = () => {
   return (
