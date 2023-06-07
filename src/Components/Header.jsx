@@ -1,18 +1,22 @@
 import { Link, useNavigate } from "react-router-dom";
 import LOGO from "../assets/logo.png";
-import { useAccount, useConnect, useDisconnect } from "wagmi";
+import { useAccount, useDisconnect } from "wagmi";
+import { logout } from "../utils";
+import { getCookie } from "../utils";
 
 const Header = () => {
   /* Router */
   const navigate = useNavigate();
   /* State */
-  const { isConnected, address } = useAccount();
-  const { connect, connectors, isLoading, pendingConnector } = useConnect();
+  const { isConnected } = useAccount();
   const { disconnect } = useDisconnect();
+  const s = getCookie("User_name");
+  console.log(s);
   /* Hooks */
   /* Functions */
   const handleDisconnect = () => {
     disconnect();
+    logout();
     navigate("/");
   };
   /* Render */
@@ -31,14 +35,14 @@ const Header = () => {
           {/* Desktop navigation */}
           <nav className="flex grow">
             {/* Desktop sign in links */}
-            {isConnected ? (
+            {isConnected || s ? (
               <ul className="flex grow justify-end flex-wrap items-center">
                 <li>
                   <div
                     className="btn-sm text-white bg-blue-500 hover:bg-blue-600 w-full shadow-sm"
                     onClick={() => navigate("/mypage")}
                   >
-                    {address}
+                    {s}
                   </div>
                 </li>
                 <li>
@@ -56,12 +60,9 @@ const Header = () => {
                   <div
                     className="font-medium text-gray-600 decoration-blue-500 decoration-2 underline-offset-2 hover:underline px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out"
                     to="/signin"
-                    onClick={() => connect({ connector: connectors[0] })}
+                    onClick={() => navigate("/signin")}
                   >
                     Sign in
-                    {isLoading &&
-                      pendingConnector?.id === connectors[0].id &&
-                      `connecting`}
                   </div>
                 </li>
 

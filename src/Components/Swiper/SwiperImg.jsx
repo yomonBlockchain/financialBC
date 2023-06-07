@@ -25,12 +25,12 @@ const SwiperImg = ({ Carousel, avatar }) => {
           />
         </div>
         {/* Title */}
-        <a
+        <div
           className="inline-block font-cabinet-grotesk font-bold text-xl decoration-blue-500 decoration-2 underline-offset-2 hover:underline"
-          href="#0"
+          style={{ cursor: "pointer" }}
         >
           {name}
-        </a>
+        </div>
         <div className="text-sm text-gray-500 italic">{description}</div>
       </div>
     </div>
