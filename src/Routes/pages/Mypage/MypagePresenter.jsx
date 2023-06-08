@@ -72,7 +72,7 @@ const MypagePresenter = () => {
         <div className="w-full text-center">
           <div className="h3 mb-10">My NFT</div>
           {nftList ? (
-            <div className="w-full flex justify-start align-middle">
+            <div className="w-full flex justify-start align-middle px-32 mx-40">
               {nftListRender}
             </div>
           ) : (
