@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { GroupAPI } from '../API';
-import Creative01 from '../assets/images/creative-01.jpg';
-import Creative02 from '../assets/images/creative-02.jpg';
-import Creative03 from '../assets/images/creative-03.jpg';
-import Creative04 from '../assets/images/creative-04.jpg';
-import CreativeBg01 from '../assets/images/creative-bg-01.jpg';
-import CreativeBg02 from '../assets/images/creative-bg-02.jpg';
-import CreativeBg03 from '../assets/images/creative-bg-03.jpg';
-import CreativeBg04 from '../assets/images/creative-bg-04.jpg';
-import CreativesImage from '../assets/images/creatives.jpg';
-import CreativesItem from './Swiper/CreativesItem';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { GroupAPI } from "../API";
+import Creative01 from "../assets/images/creative-01.jpg";
+import Creative02 from "../assets/images/creative-02.jpg";
+import Creative03 from "../assets/images/creative-03.jpg";
+import Creative04 from "../assets/images/creative-04.jpg";
+import CreativeBg01 from "../assets/images/creative-bg-01.jpg";
+import CreativeBg02 from "../assets/images/creative-bg-02.jpg";
+import CreativeBg03 from "../assets/images/creative-bg-03.jpg";
+import CreativeBg04 from "../assets/images/creative-bg-04.jpg";
+import CreativesImage from "../assets/images/creatives.jpg";
+import CreativesItem from "./Swiper/CreativesItem";
 
 const Creatives = () => {
   const [resultData, setResultData] = useState([]);
@@ -131,15 +131,18 @@ const Creatives = () => {
                   Find Other Group Recruitment....
                 </p>
                 <div>
-                  <div
-                    className="btn text-white bg-blue-500 hover:bg-blue-600 shadow-sm"
-                    href="/signup"
-                  >
+                  <div className="flex">
                     <Link
-                      className="btn-sm text-white bg-blue-500 hover:bg-blue-600 w-full shadow-sm"
-                      to={{ pathname: '/group' }}
+                      className="btn-sm text-white bg-blue-500 hover:bg-blue-600 w-full shadow-sm mx-4"
+                      to={{ pathname: "/group" }}
                     >
                       See more Group
+                    </Link>
+                    <Link
+                      className="btn-sm text-white bg-blue-500 hover:bg-blue-600 w-full shadow-sm"
+                      to={{ pathname: "/creategroup" }}
+                    >
+                      Create Group
                     </Link>
                   </div>
                 </div>

@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { AdminLayout, MainLayout } from "../Layout";
 import {
+  CreateGroup,
   DashBoard,
   Group,
   GroupDetail,
@@ -18,6 +19,7 @@ const IndexRouter = () => {
         <Route path="/" element={<Main />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/signin" element={<Signin />} />
+        <Route path="/creategroup" element={<CreateGroup />} />
       </Route>
       <Route path="/signup" element={<Signup />} />
       <Route path="/group" element={<Group />} />
