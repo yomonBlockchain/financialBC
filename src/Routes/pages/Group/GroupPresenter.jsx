@@ -19,96 +19,20 @@ const GroupPresenter = () => {
     };
     fetchData();
   }, []);
-  const groupNames = resultData.map((item) => item.group_name);
-  const groupMember = resultData.map((item) => item.group_member);
-  const groupId = resultData.map((item) => item.group_id);
-  const partedGroup = resultData.map((item) => item.is_part);
 
-  const dbData = [
-    {
-      id: 1,
-      BackSrc: CreativeBg01,
-      AuthSrc: Creative01,
-      Updown: partedGroup[0],
-      GroupName: groupNames[0],
-      GroupMember: groupMember[0],
-      GroupId: groupId[0],
-    },
-    {
-      id: 2,
-      BackSrc: CreativeBg02,
-      AuthSrc: Creative02,
-      Updown: partedGroup[1],
-      GroupName: groupNames[1],
-      GroupMember: groupMember[1],
-      GroupId: groupId[1],
-    },
-    {
-      id: 3,
-      BackSrc: CreativeBg03,
-      AuthSrc: Creative03,
-      Updown: partedGroup[2],
-      GroupName: groupNames[2],
-      GroupMember: groupMember[2],
-      GroupId: groupId[2],
-    },
-    {
-      id: 4,
-      BackSrc: CreativeBg04,
-      AuthSrc: Creative04,
-      Updown: partedGroup[3],
-      GroupName: groupNames[3],
-      GroupMember: groupMember[3],
-      GroupId: groupId[3],
-    },
-    {
-      id: 5,
-      BackSrc: CreativeBg01,
-      AuthSrc: Creative02,
-      Updown: partedGroup[4],
-      GroupName: groupNames[4],
-      GroupMember: groupMember[4],
-      GroupId: groupId[4],
-    },
-    {
-      id: 6,
-      BackSrc: CreativeBg02,
-      AuthSrc: Creative03,
-      Updown: partedGroup[5],
-      GroupName: groupNames[5],
-      GroupMember: groupMember[5],
-      GroupId: groupId[5],
-    },
-    {
-      id: 7,
-      BackSrc: CreativeBg03,
-      AuthSrc: Creative04,
-      Updown: partedGroup[6],
-      GroupName: groupNames[6],
-      GroupMember: groupMember[6],
-      GroupId: groupId[6],
-    },
-    {
-      id: 8,
-      BackSrc: CreativeBg04,
-      AuthSrc: Creative03,
-      Updown: partedGroup[7],
-      GroupName: groupNames[7],
-      GroupMember: groupMember[7],
-      GroupId: groupId[7],
-    },
-    {
-      id: 9,
-      BackSrc: CreativeBg03,
-      AuthSrc: Creative01,
-      Updown: partedGroup[8],
-      GroupName: groupNames[8],
-      GroupMember: groupMember[8],
-      GroupId: groupId[8],
-    },
-  ];
   const chunkedData = [];
   const chunkSize = 3;
+  const dbData = resultData.map((item, index) => ({
+    id: index + 1,
+    BackSrc: [CreativeBg01, CreativeBg02, CreativeBg03, CreativeBg04][
+      index % 4
+    ],
+    AuthSrc: [Creative01, Creative02, Creative03, Creative04][index % 4],
+    Updown: item.is_part,
+    GroupName: item.group_name,
+    GroupMember: item.group_member,
+    GroupId: item.group_id,
+  }));
   for (let i = 0; i < dbData.length; i += chunkSize) {
     chunkedData.push(dbData.slice(i, i + chunkSize));
   }

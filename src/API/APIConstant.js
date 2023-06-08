@@ -31,6 +31,11 @@ const AUTH_API = {
 
 const GROUP_API = {
   /**
+   * @method POST
+   * @param
+   */
+  CREATE_GROUP: `${BASE_URL}/group`,
+  /**
    * @method GET
    */
   GET_GROUPINFO: `${BASE_URL}/group`,
@@ -40,10 +45,25 @@ const GROUP_API = {
    */
   GET_GROUPDETAIL: `${BASE_URL}/group/:group_id`,
   /**
+   * @method GET
+   * @param { string } guard_leader_id
+   */
+  GET_GROUPBYGUARD: `${BASE_URL}/group/guard/:guard_leader_id`,
+  /**
    * @method PUT
    * @param
    */
   JOIN_GROUP: `${BASE_URL}/group/join`,
+  /**
+   * @method PUT
+   * @param
+   */
+  COUNT_GROUP: `${BASE_URL}/group/count`,
+  /**
+   * @method PUT
+   * @param
+   */
+  COUNT_GUARD: `${BASE_URL}/guard/count`,
 };
 
 const MINT_API = {
