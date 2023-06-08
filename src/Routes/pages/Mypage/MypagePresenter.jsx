@@ -1,14 +1,13 @@
-import React from "react";
-import CREATIVE_BG from "../../../assets/images/creative-bg-01.jpg";
-import CREATIVE_AVATAR from "../../../assets/images/creative-01.jpg";
-import contractCall from "../../../utils/ContractCall";
-import { getCookie } from "../../../utils";
+import React from 'react';
+import CREATIVE_BG from '../../../assets/images/creative-bg-01.jpg';
+import CREATIVE_AVATAR from '../../../assets/images/creative-01.jpg';
+import contractCall from '../../../utils/ContractCall';
+import { getCookie } from '../../../utils';
 
 const MypagePresenter = () => {
   /* Router */
   /* State */
-  const { guard_ether_address } = JSON.parse(getCookie("ISGUARD_USER"));
-  console.log(guard_ether_address);
+  const { guard_ether_address } = JSON.parse(getCookie('ISGUARD_USER'));
   // const [nftList, setNftList] = useState("");
   const nftList =
     guard_ether_address && contractCall.loadNFTbyAddress(guard_ether_address);
@@ -18,7 +17,6 @@ const MypagePresenter = () => {
   const nftListRender =
     nftList &&
     nftList.map((i, idx) => {
-      console.log(i);
       const [name, description, uri] = i;
       return (
         <div
@@ -59,11 +57,11 @@ const MypagePresenter = () => {
             </div>
             <div className="mb-5">
               <div className="inline-block font-cabinet-grotesk font-bold text-xl decoration-blue-500 decoration-2 underline-offset-2 hover:underline">
-                {guard_ether_address ? guard_ether_address : ""} (이름으로 변경
+                {guard_ether_address ? guard_ether_address : ''} (이름으로 변경
                 필요)
               </div>
               <div className="text-sm font-medium text-gray-500">
-                @{guard_ether_address ? guard_ether_address : ""}
+                @{guard_ether_address ? guard_ether_address : ''}
               </div>
             </div>
           </div>

@@ -52,7 +52,7 @@ const SignupContainer = () => {
         console.log(loginResult);
         const { access_token, guard_nm, ...guard_id } = loginResult;
         setCookie('Authorization', access_token);
-        setCookie('User_name', JSON.stringify(guard_nm));
+        setCookie('User_name', guard_nm);
         setCookie('ISGUARD_USER', JSON.stringify(guard_id));
         navigate('/');
         return true;
