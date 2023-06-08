@@ -103,22 +103,22 @@ const SideBar = (props) => {
             </span>
           </div>
           <div
-            id="chat"
+            id="mint"
             className={
-              menuIcon === "chat" ? "menu-icon menu-icon-click" : "menu-icon"
+              menuIcon === "mint" ? "menu-icon menu-icon-click" : "menu-icon"
             }
             onClick={changeIconColor}
           >
             <span
-              id="chat"
-              className="material-symbols-outlined"
+              id="mint"
+              class="material-symbols-outlined"
               style={
-                menuIcon === "chat"
+                menuIcon === "mint"
                   ? { fontSize: 30, color: "#fff" }
                   : { fontSize: 30 }
               }
             >
-              chat
+              generating_tokens
             </span>
           </div>
           <div
