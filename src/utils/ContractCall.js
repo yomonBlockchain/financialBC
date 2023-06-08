@@ -1,5 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useContractRead } from "wagmi";
+import {
+  useContractRead,
+  useContractWrite,
+  usePrepareContractWrite,
+} from "wagmi";
 import { tokenAbi } from "../Abi/tokenAbi";
 
 const contractInfo = {
@@ -67,6 +71,17 @@ const contractCall = {
       functionName: "ownerOf",
       args: [tokenId],
     });
+    return data;
+  },
+  safeMint: (mintInfo) => {
+    const { to, name, description, uri } = mintInfo;
+    const { config } = usePrepareContractWrite({
+      ...contractInfo,
+      functionName: "safeMint",
+      args: [to, uri, name, description],
+    });
+    const { data, write } = useContractWrite(config);
+    write?.();
     return data;
   },
 };

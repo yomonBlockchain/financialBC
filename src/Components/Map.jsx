@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import startImg from "../assets/images/placeholder.png";
 import endImg from "../assets/images/checkered-flag.png";
-// import policeIcon from "../assets/images/police-badge.png";
+import policeIcon from "../assets/images/police-badge.png";
 import "../css/map.css";
 
 const Map = (props) => {
   /* Router */
   /* State */
   var overlays = [];
-  const { search, choiceInfo } = props;
-  // const { search, pointList, sectorList, choiceInfo } = props;
+  // const { search, choiceInfo } = props;
+  const { search, pointList, sectorList, choiceInfo } = props;
   const ref = useRef(null);
   const { kakao } = window;
   const [coordinate, setCoordinate] = useState({ lat: 0, lon: 0 });
@@ -146,72 +146,72 @@ const Map = (props) => {
    * 마커 포인트 렌더링
    * @param map
    */
-  // const markerListView = (map) => {
-  //   pointList.data.map((item) => {
-  //     const { point_lat, point_lon, point_type } = item;
-  //     // 경찰서, 지구대 마커
-  //     if (point_type === "POLICE") {
-  //       var policeSrc = policeIcon, // 출발 마커이미지의 주소입니다
-  //         policeSize = new kakao.maps.Size(50, 45), // 출발 마커이미지의 크기입니다
-  //         policeOption = {
-  //           offset: new kakao.maps.Point(15, 43), // 출발 마커이미지에서 마커의 좌표에 일치시킬 좌표를 설정합니다 (기본값은 이미지의 가운데 아래입니다)
-  //         };
+  const markerListView = (map) => {
+    pointList.data.map((item) => {
+      const { point_lat, point_lon, point_type } = item;
+      // 경찰서, 지구대 마커
+      if (point_type === "POLICE") {
+        var policeSrc = policeIcon, // 출발 마커이미지의 주소입니다
+          policeSize = new kakao.maps.Size(50, 45), // 출발 마커이미지의 크기입니다
+          policeOption = {
+            offset: new kakao.maps.Point(15, 43), // 출발 마커이미지에서 마커의 좌표에 일치시킬 좌표를 설정합니다 (기본값은 이미지의 가운데 아래입니다)
+          };
 
-  //       // 출발 마커 이미지를 생성합니다
-  //       var startImage = new kakao.maps.MarkerImage(
-  //         policeSrc,
-  //         policeSize,
-  //         policeOption
-  //       );
-  //       var policePosition = new kakao.maps.LatLng(point_lat, point_lon);
-  //       var policeMarker = new kakao.maps.Marker({
-  //         map: map, // 출발 마커가 지도 위에 표시되도록 설정합니다
-  //         position: policePosition,
-  //         draggable: true, // 출발 마커가 드래그 가능하도록 설정합니다
-  //         image: startImage, // 출발 마커이미지를 설정합니다
-  //       });
-  //       policeMarker.setMap(map);
-  //     } else {
-  //       // 일반 마커 생성
-  //       var marker = new kakao.maps.Marker({
-  //         map: map,
-  //         position: new kakao.maps.LatLng(point_lat, point_lon),
-  //       });
-  //       marker.setMap(map);
-  //     }
+        // 출발 마커 이미지를 생성합니다
+        var startImage = new kakao.maps.MarkerImage(
+          policeSrc,
+          policeSize,
+          policeOption
+        );
+        var policePosition = new kakao.maps.LatLng(point_lat, point_lon);
+        var policeMarker = new kakao.maps.Marker({
+          map: map, // 출발 마커가 지도 위에 표시되도록 설정합니다
+          position: policePosition,
+          draggable: true, // 출발 마커가 드래그 가능하도록 설정합니다
+          image: startImage, // 출발 마커이미지를 설정합니다
+        });
+        policeMarker.setMap(map);
+      } else {
+        // 일반 마커 생성
+        var marker = new kakao.maps.Marker({
+          map: map,
+          position: new kakao.maps.LatLng(point_lat, point_lon),
+        });
+        marker.setMap(map);
+      }
 
-  //     return 0;
-  //   });
-  // };
-  // const circleInfo = (map, data) => {
-  //   const circle = new kakao.maps.Circle({
-  //     center: new kakao.maps.LatLng(data.sector_lat, data.sector_lon), // 원의 중심좌표
-  //     radius: data.sector_boundary, // 미터 단위의 원의 반지름
-  //     strokeWeight: 2, // 선의 두께
-  //     strokeColor:
-  //       data.sector_grade === 3
-  //         ? "#F00"
-  //         : data.sector_grade === 2
-  //         ? "#FB944A"
-  //         : "#FFEA2F", // 선의 색깔
-  //     strokeOpacity: 1, // 선의 불투명도
-  //     strokeStyle: "dashed", // 선의 스타일
-  //     fillColor:
-  //       data.sector_grade === 3
-  //         ? "#F00"
-  //         : data.sector_grade === 2
-  //         ? "#FB944A"
-  //         : "#FFEA2F", // 채우기 색깔
-  //     fillOpacity: 0.4, // 채우기 불투명도
-  //   });
-  //   circle.setMap(map);
-  // };
-  // const sectorListView = (map) => {
-  //   sectorList.data.map((item) => {
-  //     circleInfo(map, item);
-  //     return 0;
-  //   });
-  // };
+      return 0;
+    });
+  };
+  const circleInfo = (map, data) => {
+    const circle = new kakao.maps.Circle({
+      center: new kakao.maps.LatLng(data.sector_lat, data.sector_lon), // 원의 중심좌표
+      radius: data.sector_boundary, // 미터 단위의 원의 반지름
+      strokeWeight: 2, // 선의 두께
+      strokeColor:
+        data.sector_grade === 3
+          ? "#F00"
+          : data.sector_grade === 2
+          ? "#FB944A"
+          : "#FFEA2F", // 선의 색깔
+      strokeOpacity: 1, // 선의 불투명도
+      strokeStyle: "dashed", // 선의 스타일
+      fillColor:
+        data.sector_grade === 3
+          ? "#F00"
+          : data.sector_grade === 2
+          ? "#FB944A"
+          : "#FFEA2F", // 채우기 색깔
+      fillOpacity: 0.4, // 채우기 불투명도
+    });
+    circle.setMap(map);
+  };
+  const sectorListView = (map) => {
+    sectorList.data.map((item) => {
+      circleInfo(map, item);
+      return 0;
+    });
+  };
   /* Render */
   useEffect(() => {
     const container = ref.current;
@@ -294,10 +294,10 @@ const Map = (props) => {
       marker.setMap(map);
     }
 
-    // if (pointList && sectorList) {
-    //   markerListView(map);
-    //   sectorListView(map);
-    // }
+    if (pointList && sectorList) {
+      markerListView(map);
+      sectorListView(map);
+    }
     if (choiceInfo) {
       startPointView(map);
       endPointView(map);

@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { AdminLayout, MainLayout } from "../Layout";
 import {
+  AdminMint,
   CreateGroup,
   DashBoard,
   Group,
@@ -27,6 +28,7 @@ const IndexRouter = () => {
       <Route element={<AdminLayout />}>
         <Route path="/patrol" element={<Patrol />} />
         <Route path="/dashboard" element={<DashBoard />} />
+        <Route path="/mint" element={<AdminMint />} />
       </Route>
     </Routes>
   );
