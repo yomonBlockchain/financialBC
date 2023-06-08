@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { getCookie } from "../../../utils";
+import React, { useEffect, useState } from 'react';
+import { getCookie } from '../../../utils';
 
 const CreateGroupPresenter = () => {
   /* Router */
   /* State */
-  const user_nm = JSON.parse(getCookie("User_name"));
-  const [nickname, setNickname] = useState("");
+  const user_nm = JSON.parse(getCookie('User_name'));
+  const [nickname, setNickname] = useState('');
   /* Hooks */
   useEffect(() => {
     setNickname(user_nm);
@@ -30,11 +30,11 @@ const CreateGroupPresenter = () => {
                       className="block text-gray-500 text-sm font-medium mb-1"
                       htmlFor="email"
                     >
-                      User NickName
+                      Group Leader
                     </label>
                     <input
-                      id="email"
-                      name="guard_login_id"
+                      id="leader"
+                      name="group_leader"
                       type="text"
                       className="form-input w-full text-gray-800 bg-slate-200"
                       disabled
@@ -48,15 +48,79 @@ const CreateGroupPresenter = () => {
                       className="block text-gray-500 text-sm font-medium mb-1"
                       htmlFor="password"
                     >
-                      Password
+                      Group Name
                     </label>
                     <input
-                      id="password"
-                      name="guard_login_pw"
-                      type="password"
+                      id="name"
+                      name="group_name"
+                      type="text"
                       className="form-input w-full text-gray-800"
                       required
                     />
+                  </div>
+                </div>
+                <div className="flex flex-wrap mb-4">
+                  <div className="w-full">
+                    <label
+                      className="block text-gray-500 text-sm font-medium mb-1"
+                      htmlFor="password"
+                    >
+                      Group Description
+                    </label>
+                    <input
+                      id="decription"
+                      name="group_desc"
+                      type="text"
+                      className="form-input w-full text-gray-800"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-wrap mb-4">
+                  <div className="w-full">
+                    <label
+                      className="block text-gray-500 text-sm font-medium mb-1"
+                      htmlFor="password"
+                    >
+                      Group Region
+                    </label>
+                    <select
+                      id="region"
+                      name="group_region"
+                      className="form-input w-full text-gray-800"
+                      required
+                    >
+                      <option value="null">
+                        ===============================
+                      </option>
+                      <option value="Jangjeon1dong">
+                        부산광역시 금정구 장전1동
+                      </option>
+                      <option value="Jangjeon2dong">
+                        부산광역시 금정구 장전2동
+                      </option>
+                      <option value="Jangjeon3dong">
+                        부산광역시 금정구 장전3동
+                      </option>
+                      <option value="Bugok1dong">
+                        부산광역시 금정구 부곡1동
+                      </option>
+                      <option value="Bugok2dong">
+                        부산광역시 금정구 부곡2동
+                      </option>
+                      <option value="Bugok3dong">
+                        부산광역시 금정구 부곡3동
+                      </option>
+                      <option value="Bugok4dong">
+                        부산광역시 금정구 부곡4동
+                      </option>
+                      <option value="Guseo1dong">
+                        부산광역시 금정구 구서1동
+                      </option>
+                      <option value="Guseo2dong">
+                        부산광역시 금정구 구서2동
+                      </option>
+                    </select>
                   </div>
                 </div>
                 <div className="flex flex-wrap items-center justify-between mt-6">

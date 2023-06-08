@@ -46,9 +46,17 @@ const GROUP_API = {
   JOIN_GROUP: `${BASE_URL}/group/join`,
 };
 
+const MINT_API = {
+  /**
+   * @method GET
+   */
+  REQUEST_MINT: 'https://api.nft.storage/upload',
+};
+
 const APIConstant = {
   ...AUTH_API,
   ...GROUP_API,
+  ...MINT_API,
 };
 
 export default APIConstant;
