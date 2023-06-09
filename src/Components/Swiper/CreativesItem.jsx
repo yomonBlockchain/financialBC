@@ -12,7 +12,7 @@ function CreativesItem(props) {
     Updown,
     GroupId,
     GroupName,
-    GroupMember,
+    GroupDesc,
   } = props;
   /* Hooks */
   /* Functions */
@@ -66,7 +66,7 @@ function CreativesItem(props) {
           >
             {GroupName}
           </a>
-          <div className="text-sm font-medium text-gray-500">{GroupMember}</div>
+          <div className="text-sm font-medium text-gray-500">{GroupDesc}</div>
         </div>
         <div>
           <a

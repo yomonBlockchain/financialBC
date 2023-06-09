@@ -23,6 +23,7 @@ const GroupDetailPresenter = ({ handleJoinGroup }) => {
     group_name,
     group_leader_id,
     group_member,
+    group_desc,
     keeper_id,
     patrol_id,
     is_part,
@@ -99,9 +100,17 @@ const GroupDetailPresenter = ({ handleJoinGroup }) => {
                   <div className="flex flex-wrap mb-4">
                     <div className="w-full">
                       <label className="block text-gray-500 text-sm font-medium mb-1">
-                        groupMember
+                        Group Member
                       </label>
                       {group_member}
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap mb-4">
+                    <div className="w-full">
+                      <label className="block text-gray-500 text-sm font-medium mb-1">
+                        Group Description
+                      </label>
+                      {group_desc}
                     </div>
                   </div>
                   <div className="flex flex-wrap mb-4">

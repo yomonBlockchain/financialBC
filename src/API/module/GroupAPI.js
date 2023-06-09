@@ -123,15 +123,15 @@ const GroupAPI = {
   },
 
   /**
-   * 그룹 카운트
+   * 그룹 순찰 상태
    * --
-   * @param {string} countInfo
+   * @param {string} groupInfo
    * @returns
    */
-  countGroup: async (countInfo) => {
+  changePatrolStatus: async (groupInfo) => {
     try {
-      const url = APIConstant.COUNT_GROUP;
-      const result = await $http.put(url, countInfo);
+      const url = APIConstant.GROUP_PATROL_STATUS;
+      const result = await $http.put(url, groupInfo);
       const { status, message, data } = result;
       if (status === 200) {
         return data;
@@ -143,15 +143,34 @@ const GroupAPI = {
   },
 
   /**
-   * 가드 카운트
+   * 그룹 카운트
    * --
-   * @param {string} countInfo
+   * @param {string} groupInfo
    * @returns
    */
-  countGroupGuards: async (countInfo) => {
+  countGroup: async (groupInfo) => {
+    try {
+      const url = APIConstant.COUNT_GROUP;
+      const result = await $http.put(url, groupInfo);
+      const { status, message, data } = result;
+      if (status === 200) {
+        return data;
+      }
+      throw message;
+    } catch (e) {
+      return false;
+    }
+  },
+  /**
+   * 가드 카운트
+   * --
+   * @param {string} guardInfo
+   * @returns
+   */
+  countGroupGuards: async (guardInfo) => {
     try {
       const url = APIConstant.COUNT_GUARD;
-      const result = await $http.put(url, countInfo);
+      const result = await $http.put(url, guardInfo);
       const { status, message, data } = result;
       if (status === 200) {
         return data;
