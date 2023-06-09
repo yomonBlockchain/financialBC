@@ -1,31 +1,41 @@
-import React from 'react';
+import React, { useEffect } from "react";
+import CreativeBg01 from "assets/images/creative-bg-01.jpg";
+import Creative03 from "assets/images/creative-03.jpg";
+import { GroupAPI } from "API";
 
-function PatrolItem(props) {
+const PatrolItem = (props) => {
   /* Router */
   /* State */
   const {
-    Dataaos,
-    delay = 0,
-    BackSrc,
-    AuthSrc,
-    Updown,
+    groupId,
     GroupName,
-    GroupMember,
+    isPart,
+    Status,
+    guardId,
+    setGroupInfo = () => {},
   } = props;
   /* Hooks */
-  const handleWalletCall = () => {};
+  useEffect(() => {}, [Status]);
+
   /* Functions */
+  const countInfo = {
+    target_group_id: groupId,
+  };
+  const handleStatusChange = async () => {
+    await GroupAPI.countGroup(countInfo);
+    // const response = await GroupAPI.getGroupByGuard(guardId);
+    await setGroupInfo();
+  };
   /* Render */
   return (
     <div
+      key={groupId}
       className="text-center shadow-sm"
       data-aos-anchor="[data-aos-id-cards]"
-      data-aos={Dataaos}
-      data-aos-delay={delay}
     >
       <img
         className="w-full h-16 object-cover opacity-60"
-        src={BackSrc}
+        src={CreativeBg01}
         width={258}
         height={64}
         alt="img"
@@ -34,13 +44,13 @@ function PatrolItem(props) {
         <div className="relative inline-flex -mt-8 mb-3">
           <img
             className="inline-flex rounded-full"
-            src={AuthSrc}
+            src={Creative03}
             width={64}
             height={64}
             alt="img"
           />
 
-          {Updown && (
+          {isPart && (
             <svg
               className="absolute top-0 right-0"
               width="20"
@@ -59,24 +69,30 @@ function PatrolItem(props) {
           )}
         </div>
         <div className="mb-5">
-          <a
-            className="inline-block font-cabinet-grotesk font-bold text-xl decoration-blue-500 decoration-2 underline-offset-2 hover:underline"
-            href="#0"
-          >
+          <div className="inline-block font-cabinet-grotesk font-bold text-xl decoration-blue-500 decoration-2 underline-offset-2 hover:underline">
             {GroupName}
-          </a>
-          <div className="text-sm font-medium text-gray-500">{GroupMember}</div>
+          </div>
+          <div className="text-sm font-medium text-gray-500"></div>
         </div>
         <div>
-          <button
-            className={`btn-sm text-white bg-blue-800 hover:bg-blue-900 shadow-sm`}
-          >
-            Patrol Finished
-          </button>
+          {!Status ? (
+            <button
+              className={`btn-sm text-white bg-green-800 hover:bg-green-900 shadow-sm`}
+              onClick={handleStatusChange}
+            >
+              Patrol Done
+            </button>
+          ) : (
+            <button
+              className={`btn-sm text-white bg-blue-800 hover:bg-blue-900 shadow-sm`}
+            >
+              Patrol Finished
+            </button>
+          )}
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default PatrolItem;

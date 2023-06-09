@@ -1,6 +1,4 @@
-import { APIManager } from "../../utils";
 import APIConstant from "../APIConstant";
-const $http = new APIManager();
 // eslint-disable-next-line import/first
 import axios from "axios";
 
