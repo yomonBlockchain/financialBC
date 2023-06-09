@@ -7,14 +7,12 @@ import { getCookie } from "../../../utils";
 
 const MypagePresenter = ({ userInfo, groupInfo, setGroupInfo }) => {
   /* Router */
-  console.log(groupInfo);
   /* State */
   const guard_name = getCookie("User_name");
   const { guard_id, guard_ether_address, guard_count_patrol } = userInfo;
   const nftList =
     guard_ether_address && contractCall.loadNFTbyAddress(guard_ether_address);
   /* Hooks */
-
   /* Functions */
   /* Render */
   const nftListRender =
@@ -46,6 +44,8 @@ const MypagePresenter = ({ userInfo, groupInfo, setGroupInfo }) => {
               isPart={i.is_part}
               GroupName={i.group_name}
               setGroupInfo={setGroupInfo}
+              groupMember={i.group_member}
+              desc={i.group_desc}
             />
           </div>
         );
@@ -63,8 +63,10 @@ const MypagePresenter = ({ userInfo, groupInfo, setGroupInfo }) => {
               data-aos="fade-down"
               isPart={i.is_part}
               GroupName={i.group_name}
-              guardId={guard_id}
+              guardId={i.guard_id}
               setGroupInfo={setGroupInfo}
+              groupMember={i.group_member}
+              desc={i.group_desc}
             />
           </div>
         );
@@ -97,8 +99,7 @@ const MypagePresenter = ({ userInfo, groupInfo, setGroupInfo }) => {
             <div className="h2 mb-10">My Information</div>
             <div className="mb-5">
               <div className="inline-block font-cabinet-grotesk font-bold text-xl decoration-blue-500 decoration-2 underline-offset-2 hover:underline">
-                {guard_nm ? guard_nm : ''}
-
+                {guard_name ? guard_name : ""}
               </div>
               <div className="text-sm font-medium text-gray-500">
                 @{guard_id ? guard_id : ""}

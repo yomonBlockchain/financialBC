@@ -11,19 +11,25 @@ const PatrolItem = (props) => {
     GroupName,
     isPart,
     Status,
-    guardId,
     setGroupInfo = () => {},
+    desc,
+    groupMember,
   } = props;
   /* Hooks */
   useEffect(() => {}, [Status]);
-
   /* Functions */
   const countInfo = {
     target_group_id: groupId,
   };
+  const groupInfo = {
+    group_guards: groupMember,
+  };
   const handleStatusChange = async () => {
-    await GroupAPI.countGroup(countInfo);
-    // const response = await GroupAPI.getGroupByGuard(guardId);
+    const result = await GroupAPI.countGroup(countInfo);
+    if (result) {
+      const count = await GroupAPI.countGroupGuards(groupInfo);
+      console.log("result:", count);
+    }
     await setGroupInfo();
   };
   /* Render */
@@ -72,7 +78,7 @@ const PatrolItem = (props) => {
           <div className="inline-block font-cabinet-grotesk font-bold text-xl decoration-blue-500 decoration-2 underline-offset-2 hover:underline">
             {GroupName}
           </div>
-          <div className="text-sm font-medium text-gray-500"></div>
+          <div className="text-sm font-medium text-gray-500">{desc}</div>
         </div>
         <div>
           {!Status ? (
