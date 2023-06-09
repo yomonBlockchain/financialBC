@@ -65,15 +65,32 @@ const GroupAPI = {
   /**
    * 가드로 그룹 정보 조회
    * --
-   * @param {string} guard_leader_id
+   * @param {string} guard_id
    * @returns
    */
-  getGroupByGuard: async (guard_leader_id) => {
+  getGroupByGuard: async (guard_id) => {
     try {
-      const url = APIConstant.GET_GROUPBYGUARD.replace(
-        ':guard_leader_id',
-        guard_leader_id
-      );
+      const url = APIConstant.GET_GROUPBYGUARD.replace(':guard_id', guard_id);
+      const result = await $http.get(url);
+      const { status, message, data } = result;
+      if (status === 200) {
+        return data;
+      }
+      throw message;
+    } catch (e) {
+      throw e;
+    }
+  },
+
+  /**
+   * 가드 상세정보 조회
+   * --
+   * @param {string} guard_id
+   * @returns
+   */
+  getGuardDetail: async (guard_id) => {
+    try {
+      const url = APIConstant.GET_GUARDDETAIL.replace(':guard_id', guard_id);
       const result = await $http.get(url);
       const { status, message, data } = result;
       if (status === 200) {
@@ -114,6 +131,26 @@ const GroupAPI = {
   countGroup: async (countInfo) => {
     try {
       const url = APIConstant.COUNT_GROUP;
+      const result = await $http.put(url, countInfo);
+      const { status, message, data } = result;
+      if (status === 200) {
+        return data;
+      }
+      throw message;
+    } catch (e) {
+      return false;
+    }
+  },
+
+  /**
+   * 가드 카운트
+   * --
+   * @param {string} countInfo
+   * @returns
+   */
+  countGroupGuards: async (countInfo) => {
+    try {
+      const url = APIConstant.COUNT_GUARD;
       const result = await $http.put(url, countInfo);
       const { status, message, data } = result;
       if (status === 200) {
