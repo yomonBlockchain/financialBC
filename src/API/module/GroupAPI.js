@@ -1,5 +1,5 @@
-import { APIManager } from '../../utils';
-import APIConstant from '../APIConstant';
+import { APIManager } from "../../utils";
+import APIConstant from "../APIConstant";
 const $http = new APIManager();
 
 const GroupAPI = {
@@ -50,7 +50,7 @@ const GroupAPI = {
    */
   getGroupDetail: async (group_id) => {
     try {
-      const url = APIConstant.GET_GROUPDETAIL.replace(':group_id', group_id);
+      const url = APIConstant.GET_GROUPDETAIL.replace(":group_id", group_id);
       const result = await $http.get(url);
       const { status, message, data } = result;
       if (status === 200) {
@@ -70,7 +70,7 @@ const GroupAPI = {
    */
   getGroupByGuard: async (guard_id) => {
     try {
-      const url = APIConstant.GET_GROUPBYGUARD.replace(':guard_id', guard_id);
+      const url = APIConstant.GET_GROUPBYGUARD.replace(":guard_id", guard_id);
       const result = await $http.get(url);
       const { status, message, data } = result;
       if (status === 200) {
@@ -90,7 +90,7 @@ const GroupAPI = {
    */
   getGuardDetail: async (guard_id) => {
     try {
-      const url = APIConstant.GET_GUARDDETAIL.replace(':guard_id', guard_id);
+      const url = APIConstant.GET_GUARDDETAIL.replace(":guard_id", guard_id);
       const result = await $http.get(url);
       const { status, message, data } = result;
       if (status === 200) {
@@ -156,6 +156,7 @@ const GroupAPI = {
       if (status === 200) {
         return data;
       }
+
       throw message;
     } catch (e) {
       return false;
@@ -172,6 +173,7 @@ const GroupAPI = {
       const url = APIConstant.COUNT_GUARD;
       const result = await $http.put(url, guardInfo);
       const { status, message, data } = result;
+      console.log("data:", data);
       if (status === 200) {
         return data;
       }
