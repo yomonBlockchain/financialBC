@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { GroupAPI } from "../API";
-import Creative01 from "../assets/images/creative-01.jpg";
-import Creative02 from "../assets/images/creative-02.jpg";
-import Creative03 from "../assets/images/creative-03.jpg";
-import Creative04 from "../assets/images/creative-04.jpg";
-import CreativeBg01 from "../assets/images/creative-bg-01.jpg";
-import CreativeBg02 from "../assets/images/creative-bg-02.jpg";
-import CreativeBg03 from "../assets/images/creative-bg-03.jpg";
-import CreativeBg04 from "../assets/images/creative-bg-04.jpg";
-import CreativesImage from "../assets/images/creatives.jpg";
-import CreativesItem from "./Swiper/CreativesItem";
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { GroupAPI } from '../API';
+import Creative01 from '../assets/images/creative-01.jpg';
+import Creative02 from '../assets/images/creative-02.jpg';
+import Creative03 from '../assets/images/creative-03.jpg';
+import Creative04 from '../assets/images/creative-04.jpg';
+import CreativeBg01 from '../assets/images/creative-bg-01.jpg';
+import CreativeBg02 from '../assets/images/creative-bg-02.jpg';
+import CreativeBg03 from '../assets/images/creative-bg-03.jpg';
+import CreativeBg04 from '../assets/images/creative-bg-04.jpg';
+import CreativesImage from '../assets/images/creatives.jpg';
+import CreativesItem from './Swiper/CreativesItem';
 
 const Creatives = () => {
   const [resultData, setResultData] = useState([]);
@@ -22,7 +22,7 @@ const Creatives = () => {
     fetchData();
   }, []);
   const groupNames = resultData.map((item) => item.group_name);
-  const groupMember = resultData.map((item) => item.group_member);
+  const groupDesc = resultData.map((item) => item.group_desc);
   const groupId = resultData.map((item) => item.group_id);
 
   const dbData = [
@@ -32,7 +32,7 @@ const Creatives = () => {
       AuthSrc: Creative01,
       Updown: true,
       GroupName: groupNames[0],
-      GroupMember: groupMember[0],
+      GroupDesc: groupDesc[0],
       GroupId: groupId[0],
     },
     {
@@ -41,7 +41,7 @@ const Creatives = () => {
       AuthSrc: Creative02,
       Updown: false,
       GroupName: groupNames[1],
-      GroupMember: groupMember[1],
+      GroupDesc: groupDesc[1],
       GroupId: groupId[1],
     },
     {
@@ -50,7 +50,7 @@ const Creatives = () => {
       AuthSrc: Creative03,
       Updown: true,
       GroupName: groupNames[2],
-      GroupMember: groupMember[2],
+      GroupDesc: groupDesc[2],
       GroupId: groupId[2],
     },
     {
@@ -59,7 +59,7 @@ const Creatives = () => {
       AuthSrc: Creative04,
       Updown: false,
       GroupName: groupNames[3],
-      GroupMember: groupMember[3],
+      GroupDesc: groupDesc[3],
       GroupId: groupId[3],
     },
   ];
@@ -89,7 +89,7 @@ const Creatives = () => {
                       Updown={item.Updown}
                       GroupId={item.GroupId}
                       GroupName={item.GroupName}
-                      GroupMember={item.GroupMember}
+                      GroupDesc={item.GroupDesc}
                     />
                   ))}
                 </div>
@@ -107,7 +107,7 @@ const Creatives = () => {
                       Updown={item.Updown}
                       GroupId={item.GroupId}
                       GroupName={item.GroupName}
-                      GroupMember={item.GroupMember}
+                      GroupDesc={item.GroupDesc}
                     />
                   ))}
                 </div>
@@ -133,13 +133,13 @@ const Creatives = () => {
                   <div className="flex">
                     <Link
                       className="btn-sm text-white bg-blue-500 hover:bg-blue-600 w-full shadow-sm mx-4"
-                      to={{ pathname: "/group" }}
+                      to={{ pathname: '/group' }}
                     >
                       See more Group
                     </Link>
                     <Link
                       className="btn-sm text-white bg-blue-500 hover:bg-blue-600 w-full shadow-sm"
-                      to={{ pathname: "/creategroup" }}
+                      to={{ pathname: '/creategroup' }}
                     >
                       Create Group
                     </Link>

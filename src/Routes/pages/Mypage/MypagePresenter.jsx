@@ -14,6 +14,7 @@ const MypagePresenter = ({ userInfo, groupInfo, setGroupInfo }) => {
   const nftList =
     guard_ether_address && contractCall.loadNFTbyAddress(guard_ether_address);
   /* Hooks */
+
   /* Functions */
   /* Render */
   const nftListRender =
@@ -96,7 +97,8 @@ const MypagePresenter = ({ userInfo, groupInfo, setGroupInfo }) => {
             <div className="h2 mb-10">My Information</div>
             <div className="mb-5">
               <div className="inline-block font-cabinet-grotesk font-bold text-xl decoration-blue-500 decoration-2 underline-offset-2 hover:underline">
-                {guard_name ? guard_name : ""}
+                {guard_nm ? guard_nm : ''}
+
               </div>
               <div className="text-sm font-medium text-gray-500">
                 @{guard_id ? guard_id : ""}
