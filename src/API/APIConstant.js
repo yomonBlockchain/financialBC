@@ -62,6 +62,11 @@ const GROUP_API = {
    * @method PUT
    * @param
    */
+  GROUP_PATROL_STATUS: `${BASE_URL}/group/patrol`,
+  /**
+   * @method PUT
+   * @param
+   */
   COUNT_GROUP: `${BASE_URL}/group/count`,
   /**
    * @method PUT
