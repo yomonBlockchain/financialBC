@@ -18,28 +18,33 @@ import { getCookie } from '../../../utils';
 const MypagePresenter = () => {
   /* Router */
   /* State */
-  const guard_name = getCookie('User_name');
-  const { guard_id, guard_ether_address, guard_count_patrol } = JSON.parse(
+
+  const [groupData, setGroupData] = useState([]);
+  const [guardData, setGuardData] = useState([]);
+  const guard_nm = getCookie('User_name');
+  const { guard_id, guard_ether_address } = JSON.parse(
     getCookie('ISGUARD_USER')
   );
 
-  const nftList =
-    guard_ether_address && contractCall.loadNFTbyAddress(guard_ether_address);
-
   /* Hooks */
-  const [resultData, setResultData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const response = await GroupAPI.getGroupByGuard(guard_id);
-      setResultData(response);
+      const guardResponse = await GroupAPI.getGuardDetail(guard_id);
+      const groupResponse = await GroupAPI.getGroupByGuard(guard_id);
+      setGuardData(guardResponse);
+      setGroupData(groupResponse);
     };
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const nftList =
+    guard_ether_address && contractCall.loadNFTbyAddress(guard_ether_address);
+
+  const { guard_count_patrol } = guardData;
   const groupList = [];
   const patrolList = [];
-  const dbData = resultData.map((item, index) => ({
+  const dbData = groupData.map((item, index) => ({
     id: index + 1,
     BackSrc: [CreativeBg01, CreativeBg02, CreativeBg03, CreativeBg04][
       index % 4
@@ -148,7 +153,7 @@ const MypagePresenter = () => {
             <div className="h2 mb-10">My Information</div>
             <div className="mb-5">
               <div className="inline-block font-cabinet-grotesk font-bold text-xl decoration-blue-500 decoration-2 underline-offset-2 hover:underline">
-                {guard_name ? guard_name : ''}
+                {guard_nm ? guard_nm : ''}
               </div>
               <div className="text-sm font-medium text-gray-500">
                 @{guard_id ? guard_id : ''}
