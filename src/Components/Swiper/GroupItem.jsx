@@ -18,9 +18,13 @@ function GroupItem(props) {
   const countInfo = {
     target_group_id: GroupId,
   };
+  const guardInfo = {
+    group_guards: GroupMember,
+  };
   const handlePatrolCall = useCallback(async () => {
-    console.log(countInfo);
+    console.log(guardInfo);
     await GroupAPI.countGroup(countInfo);
+    await GroupAPI.countGroupGuards(guardInfo);
   }, [countInfo]);
   /* Functions */
   /* Render */

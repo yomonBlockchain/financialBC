@@ -6,7 +6,6 @@ const AUTH_API = {
    * @param {string}signup_id
    */
   GET_SIGNUP: `${BASE_URL}/auth/guard/signin`,
-
   /**
    * @method GET
    * @param {string}signup_id
@@ -46,9 +45,14 @@ const GROUP_API = {
   GET_GROUPDETAIL: `${BASE_URL}/group/:group_id`,
   /**
    * @method GET
-   * @param { string } guard_leader_id
+   * @param { string } guard_id
    */
-  GET_GROUPBYGUARD: `${BASE_URL}/group/guard/:guard_leader_id`,
+  GET_GROUPBYGUARD: `${BASE_URL}/group/guard/:guard_id`,
+  /**
+   * @method GET
+   * @param { string } guard_id
+   */
+  GET_GUARDDETAIL: `${BASE_URL}/guard/:guard_id`,
   /**
    * @method PUT
    * @param
@@ -63,7 +67,7 @@ const GROUP_API = {
    * @method PUT
    * @param
    */
-  COUNT_GUARD: `${BASE_URL}/guard/count`,
+  COUNT_GUARD: `${BASE_URL}/guard/groupcount`,
 };
 
 const MINT_API = {
