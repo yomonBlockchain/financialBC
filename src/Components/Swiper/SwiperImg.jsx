@@ -6,7 +6,7 @@ const SwiperImg = ({ Carousel, avatar }) => {
     <div className="swiper-slide h-auto flex flex-col">
       {/* img */}
       <img
-        className="w-full aspect-[7/4] object-cover"
+        className="w-full aspect-[7/6] object-cover"
         src={uri}
         width={259}
         height={148}
@@ -14,16 +14,6 @@ const SwiperImg = ({ Carousel, avatar }) => {
       />
       {/* White box */}
       <div className="grow bg-white px-4 pb-6">
-        {/* Avatars */}
-        <div className="flex items-start -space-x-3 -ml-0.5 mb-4 -mt-5">
-          <img
-            className="rounded-full border-2 border-white box-content"
-            src={avatar}
-            width={36}
-            height={36}
-            alt="Avatar 01"
-          />
-        </div>
         {/* Title */}
         <div
           className="inline-block font-cabinet-grotesk font-bold text-xl decoration-blue-500 decoration-2 underline-offset-2 hover:underline"
