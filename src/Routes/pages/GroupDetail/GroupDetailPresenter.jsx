@@ -28,9 +28,10 @@ const GroupDetailPresenter = ({ handleJoinGroup }) => {
     is_part,
   } = resultData;
   const RecruitmentStatus = is_part ? 'Recruiting' : 'Recruitment completed';
+  const { guard_id } = JSON.parse(getCookie('ISGUARD_USER'));
   const joinInfo = {
     target_group_id: group_id,
-    guard_id: getCookie('User_name'),
+    guard_id: guard_id,
   };
   const handleJoinCall = () => {
     handleJoinGroup(joinInfo);
