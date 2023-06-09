@@ -6,12 +6,12 @@ import {
   useWaitForTransaction,
 } from "wagmi";
 const contractInfo = {
-  address: "0x80dBe94a426600721fb0190DFbC4b43A72BD7d81",
+  address: "0x63EdC5550575C819DDFFc506687E9fE7827741FB",
   abi: tokenAbi,
   chainId: 11155111,
 };
 
-const AdminMintPresenter = () => {
+const AdminMintPresenter = ({ handleCreateIpfs }) => {
   /* Router */
   /* State */
   const initialState = {
@@ -20,7 +20,9 @@ const AdminMintPresenter = () => {
     name: "",
     description: "",
   };
+  const [mintable, setMintable] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [viewFile, setViewFile] = useState(null);
   const [mintInfo, setMintInfo] = useState(initialState);
   /* Hooks */
   const { config } = usePrepareContractWrite({
@@ -38,14 +40,26 @@ const AdminMintPresenter = () => {
   /* Functions */
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
-    setSelectedImage(URL.createObjectURL(file));
+    setSelectedImage(file);
+    setViewFile(URL.createObjectURL(file));
   };
   const handleMintInfo = (e) => {
     setMintInfo({ ...mintInfo, [e.target.name]: e.target.value });
   };
-  const handleOnMint = (e) => {
+  const handleOnMint = async (e) => {
     e.preventDefault();
+    console.log(mintInfo);
     write?.();
+    setMintable(false);
+  };
+  const handleOnIfps = async () => {
+    console.log(selectedImage);
+    const ipfsInfo = await handleCreateIpfs(selectedImage);
+    setMintInfo({
+      ...mintInfo,
+      uri: `https://nftstorage.link/ipfs/${ipfsInfo.value.cid}/${ipfsInfo.value.files[0].name}`,
+    });
+    setMintable(true);
   };
 
   /* Render */
@@ -125,17 +139,32 @@ const AdminMintPresenter = () => {
                 <div>
                   <img
                     className="w-full object-cover"
-                    src={selectedImage}
+                    src={viewFile}
                     width={300}
                     alt="upload_image"
                   />
                 </div>
               )}
-              <div className="w-full">
+              <div className="w-full my-2">
                 <button
                   id="submit"
                   type="submit"
                   className="btn-sm text-white bg-[#1D9BF0] hover:bg-[#1A90DF] w-full relative flex items-center"
+                  onClick={handleOnIfps}
+                >
+                  Ipfs 생성
+                </button>
+              </div>
+              <div className="w-full">
+                <button
+                  id="submit"
+                  type="submit"
+                  className={`${
+                    mintable
+                      ? "btn-sm text-white bg-[#1D9BF0] hover:bg-[#1A90DF] w-full relative flex items-center"
+                      : "btn-sm text-white disabled bg-gray-300 w-full relative flex items-center"
+                  }`}
+                  disabled={!mintable}
                   onClick={handleOnMint}
                 >
                   {isLoading ? "Minting...." : "Mint"}

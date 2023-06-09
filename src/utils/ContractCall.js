@@ -3,7 +3,7 @@ import { useContractRead } from "wagmi";
 import { tokenAbi } from "../Abi/tokenAbi";
 
 const contractInfo = {
-  address: "0x80dBe94a426600721fb0190DFbC4b43A72BD7d81",
+  address: "0x63EdC5550575C819DDFFc506687E9fE7827741FB",
   abi: tokenAbi,
   chainId: 11155111,
 };
@@ -18,7 +18,7 @@ const contractCall = {
 
     return data;
   },
-  getTotalMintCount: () => {
+  getTotalSupply: () => {
     const { data } = useContractRead({
       ...contractInfo,
       functionName: "getTotalMintCount",
@@ -26,7 +26,7 @@ const contractCall = {
     return data;
   },
   loadNFT: () => {
-    let nftTotalSuffly = contractCall.getTotalMintCount();
+    let nftTotalSuffly = contractCall.getTotalSupply();
     const nftList =
       nftTotalSuffly &&
       [...new Array(Number(nftTotalSuffly))].map((_, idx) => {

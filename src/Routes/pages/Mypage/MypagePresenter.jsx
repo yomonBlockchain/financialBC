@@ -1,26 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { GroupAPI } from '../../../API';
-import CREATIVE_BG from '../../../assets/images/creative-bg-01.jpg';
-import CREATIVE_AVATAR from '../../../assets/images/creative-01.jpg';
-import contractCall from '../../../utils/ContractCall';
-import GroupItem from '../../../Components/Swiper/GroupItem';
-import PatrolItem from '../../../Components/Swiper/PatrolItem';
-import Creative01 from '../../../assets/images/creative-01.jpg';
-import Creative02 from '../../../assets/images/creative-02.jpg';
-import Creative03 from '../../../assets/images/creative-03.jpg';
-import Creative04 from '../../../assets/images/creative-04.jpg';
-import CreativeBg01 from '../../../assets/images/creative-bg-01.jpg';
-import CreativeBg02 from '../../../assets/images/creative-bg-02.jpg';
-import CreativeBg03 from '../../../assets/images/creative-bg-03.jpg';
-import CreativeBg04 from '../../../assets/images/creative-bg-04.jpg';
-import { getCookie } from '../../../utils';
+import React, { useEffect, useState } from "react";
+import { GroupAPI } from "../../../API";
+import CREATIVE_BG from "../../../assets/images/creative-bg-01.jpg";
+import CREATIVE_AVATAR from "../../../assets/images/creative-01.jpg";
+import contractCall from "../../../utils/ContractCall";
+import GroupItem from "../../../Components/Swiper/GroupItem";
+import PatrolItem from "../../../Components/Swiper/PatrolItem";
+import Creative01 from "../../../assets/images/creative-01.jpg";
+import Creative02 from "../../../assets/images/creative-02.jpg";
+import Creative03 from "../../../assets/images/creative-03.jpg";
+import Creative04 from "../../../assets/images/creative-04.jpg";
+import CreativeBg01 from "../../../assets/images/creative-bg-01.jpg";
+import CreativeBg02 from "../../../assets/images/creative-bg-02.jpg";
+import CreativeBg03 from "../../../assets/images/creative-bg-03.jpg";
+import CreativeBg04 from "../../../assets/images/creative-bg-04.jpg";
+import { getCookie } from "../../../utils";
 
 const MypagePresenter = () => {
   /* Router */
   /* State */
-  const guard_name = getCookie('User_name');
+  const guard_name = getCookie("User_name");
   const { guard_id, guard_ether_address, guard_count_patrol } = JSON.parse(
-    getCookie('ISGUARD_USER')
+    getCookie("ISGUARD_USER")
   );
 
   const nftList =
@@ -79,7 +79,7 @@ const MypagePresenter = () => {
               GroupName={item.GroupName}
               GroupMember={item.GroupMember}
             />
-            {index !== row.length - 1 && <div style={{ margin: '20px' }}></div>}
+            {index !== row.length - 1 && <div style={{ margin: "20px" }}></div>}
           </React.Fragment>
         ))}
       </React.Fragment>
@@ -99,7 +99,7 @@ const MypagePresenter = () => {
               GroupName={item.GroupName}
               GroupMember={item.GroupMember}
             />
-            {index !== row.length - 1 && <div style={{ margin: '20px' }}></div>}
+            {index !== row.length - 1 && <div style={{ margin: "20px" }}></div>}
           </React.Fragment>
         ))}
       </React.Fragment>
@@ -148,13 +148,13 @@ const MypagePresenter = () => {
             <div className="h2 mb-10">My Information</div>
             <div className="mb-5">
               <div className="inline-block font-cabinet-grotesk font-bold text-xl decoration-blue-500 decoration-2 underline-offset-2 hover:underline">
-                {guard_name ? guard_name : ''}
+                {guard_name ? guard_name : ""}
               </div>
               <div className="text-sm font-medium text-gray-500">
-                @{guard_id ? guard_id : ''}
+                @{guard_id ? guard_id : ""}
               </div>
               <div className="text-sm font-medium text-gray-500">
-                ${guard_ether_address ? guard_ether_address : ''}
+                ${guard_ether_address ? guard_ether_address : ""}
               </div>
               <div className="text-sm font-medium text-gray-500">
                 순찰 횟수: {guard_count_patrol}회
