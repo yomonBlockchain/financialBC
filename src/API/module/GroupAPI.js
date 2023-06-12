@@ -172,10 +172,9 @@ const GroupAPI = {
     try {
       const url = APIConstant.COUNT_GUARD;
       const result = await $http.put(url, guardInfo);
-      const { status, message, data } = result;
-      console.log("data:", data);
+      const { status, message } = result;
       if (status === 200) {
-        return data;
+        return status;
       }
       throw message;
     } catch (e) {

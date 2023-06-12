@@ -11,7 +11,6 @@ const Header = () => {
   const { isConnected } = useAccount();
   const { disconnect } = useDisconnect();
   const s = getCookie("User_name");
-  console.log(s);
   /* Hooks */
   /* Functions */
   const handleDisconnect = () => {

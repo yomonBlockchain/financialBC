@@ -3,7 +3,7 @@ import { useContractRead } from "wagmi";
 import { tokenAbi } from "../Abi/tokenAbi";
 
 const contractInfo = {
-  address: "0x63EdC5550575C819DDFFc506687E9fE7827741FB",
+  address: "0x358b54073E0D4E2701d7565806094a1617916C3A",
   abi: tokenAbi,
   chainId: 11155111,
 };

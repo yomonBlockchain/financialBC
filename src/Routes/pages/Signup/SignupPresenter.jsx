@@ -60,9 +60,7 @@ const SignupPresenter = (props) => {
                       />
                     </svg>
                   </div>
-                  <h1 className="h2 font-cabinet-grotesk">
-                    You've been invited by Mark Hooker to join Creative
-                  </h1>
+                  <h1 className="h2 font-cabinet-grotesk">IS Guard Signup</h1>
                 </div>
                 <div className="max-w-sm mx-auto">
                   <div className="flex flex-wrap mb-4">
