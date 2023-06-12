@@ -1,18 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import CREATIVE_BG from "../../../assets/images/creative-bg-01.jpg";
 import CREATIVE_AVATAR from "../../../assets/images/creative-01.jpg";
 import contractCall from "../../../utils/ContractCall";
 import PatrolItem from "../../../Components/Swiper/PatrolItem";
 import { getCookie } from "../../../utils";
+import { useEffect } from "react";
 
-const MypagePresenter = ({ userInfo, groupInfo, setGroupInfo }) => {
+const MypagePresenter = ({
+  userInfo,
+  groupInfo,
+  setGroupInfo,
+  guardInfo,
+  getGuardInfo,
+  erc20,
+}) => {
   /* Router */
   /* State */
   const guard_name = getCookie("User_name");
-  const { guard_id, guard_ether_address, guard_count_patrol } = userInfo;
-  const nftList =
+  const { guard_ether_address } = userInfo;
+  const [nftList, setNftList] = useState([]);
+  const nftInfoList =
     guard_ether_address && contractCall.loadNFTbyAddress(guard_ether_address);
   /* Hooks */
+  useEffect(() => {
+    setNftList(nftInfoList);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   /* Functions */
   /* Render */
   const nftListRender =
@@ -44,6 +58,8 @@ const MypagePresenter = ({ userInfo, groupInfo, setGroupInfo }) => {
               isPart={i.is_part}
               GroupName={i.group_name}
               setGroupInfo={setGroupInfo}
+              getGuardInfo={getGuardInfo}
+              guardInfo={guardInfo}
               groupMember={i.group_member}
               desc={i.group_desc}
             />
@@ -65,6 +81,8 @@ const MypagePresenter = ({ userInfo, groupInfo, setGroupInfo }) => {
               GroupName={i.group_name}
               guardId={i.guard_id}
               setGroupInfo={setGroupInfo}
+              getGuardInfo={getGuardInfo}
+              guardInfo={guardInfo}
               groupMember={i.group_member}
               desc={i.group_desc}
             />
@@ -102,13 +120,16 @@ const MypagePresenter = ({ userInfo, groupInfo, setGroupInfo }) => {
                 {guard_name ? guard_name : ""}
               </div>
               <div className="text-sm font-medium text-gray-500">
-                @{guard_id ? guard_id : ""}
+                @{guardInfo ? guardInfo.guard_id : ""}
               </div>
               <div className="text-sm font-medium text-gray-500">
-                ${guard_ether_address ? guard_ether_address : ""}
+                ${guardInfo ? guardInfo.guard_ether_address : ""}
               </div>
               <div className="text-sm font-medium text-gray-500">
-                순찰 횟수: {guard_count_patrol}회
+                순찰 횟수: {guardInfo ? guardInfo.guard_count_patrol : ""}회
+              </div>
+              <div className="text-sm font-medium text-gray-500">
+                보유 PTK: {erc20 ? `${erc20} PTK` : "0 PTK"}
               </div>
             </div>
           </div>
@@ -120,7 +141,7 @@ const MypagePresenter = ({ userInfo, groupInfo, setGroupInfo }) => {
           <div className="h3 mb-10">My Joining Group</div>
 
           {joiningGroupRender ? (
-            <div className="w-full flex justify-start align-middle px-32 mx-40">
+            <div className="w-full flex justify-center">
               {joiningGroupRender}
             </div>
           ) : (
@@ -133,7 +154,7 @@ const MypagePresenter = ({ userInfo, groupInfo, setGroupInfo }) => {
           <div className="h3 mb-10">My Completed Patrol</div>
 
           {completedPatrolRender ? (
-            <div className="w-full flex justify-start align-middle px-32 mx-40 flex-wrap">
+            <div className="w-full flex justify-center align-middle flex-wrap">
               {completedPatrolRender}
             </div>
           ) : (
@@ -144,8 +165,8 @@ const MypagePresenter = ({ userInfo, groupInfo, setGroupInfo }) => {
         </div>
         <div className="w-full text-center">
           <div className="h3 mb-10">My NFT</div>
-          {nftList ? (
-            <div className="w-full flex justify-start align-middle px-32 mx-40">
+          {nftListRender ? (
+            <div className="w-full flex justify-center align-middle">
               {nftListRender}
             </div>
           ) : (

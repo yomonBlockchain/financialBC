@@ -1,4 +1,4 @@
-import { BASE_URL } from '../utils';
+import { BASE_URL } from "../utils";
 
 const AUTH_API = {
   /**
@@ -79,7 +79,11 @@ const MINT_API = {
   /**
    * @method GET
    */
-  REQUEST_MINT: 'https://api.nft.storage/upload',
+  REQUEST_MINT: "https://api.nft.storage/upload",
+
+  PATROL_MINT: `${BASE_URL}/web3/mint`,
+
+  MINT_TOKEN: `${BASE_URL}/web3/token`,
 };
 
 const APIConstant = {

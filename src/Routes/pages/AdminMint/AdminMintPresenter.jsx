@@ -5,8 +5,9 @@ import {
   usePrepareContractWrite,
   useWaitForTransaction,
 } from "wagmi";
+import { useLoading } from "utils/LoadingManager";
 const contractInfo = {
-  address: "0x63EdC5550575C819DDFFc506687E9fE7827741FB",
+  address: "0x358b54073E0D4E2701d7565806094a1617916C3A",
   abi: tokenAbi,
   chainId: 11155111,
 };
@@ -14,6 +15,7 @@ const contractInfo = {
 const AdminMintPresenter = ({ handleCreateIpfs }) => {
   /* Router */
   /* State */
+  const { handleLoadingTimer } = useLoading();
   const initialState = {
     to: "",
     uri: "",
@@ -48,12 +50,14 @@ const AdminMintPresenter = ({ handleCreateIpfs }) => {
   };
   const handleOnMint = async (e) => {
     e.preventDefault();
+    handleLoadingTimer(10000);
     console.log(mintInfo);
     write?.();
     setMintable(false);
   };
   const handleOnIfps = async () => {
     console.log(selectedImage);
+    handleLoadingTimer(5000);
     const ipfsInfo = await handleCreateIpfs(selectedImage);
     setMintInfo({
       ...mintInfo,
@@ -170,7 +174,9 @@ const AdminMintPresenter = ({ handleCreateIpfs }) => {
                   {isLoading ? "Minting...." : "Mint"}
                 </button>
               </div>
-              <div>{isSuccess && data?.hash}</div>
+              <div>
+                <h3>{isSuccess && data?.hash}</h3>
+              </div>
               {isError && <div>Error: {error}</div>}
             </div>
           </div>

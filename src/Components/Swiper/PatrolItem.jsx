@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import CreativeBg01 from "assets/images/creative-bg-01.jpg";
 import Creative03 from "assets/images/creative-03.jpg";
-import { GroupAPI } from "API";
-
+import { GroupAPI, MintAPI } from "API";
+import { useLoading } from "utils/LoadingManager";
 const PatrolItem = (props) => {
   /* Router */
   /* State */
+  const { handleLoadingTimer } = useLoading();
   const {
     groupId,
     GroupName,
@@ -14,6 +15,8 @@ const PatrolItem = (props) => {
     setGroupInfo = () => {},
     desc,
     groupMember,
+    getGuardInfo,
+    guardInfo,
   } = props;
   /* Hooks */
   useEffect(() => {}, [Status]);
@@ -24,13 +27,33 @@ const PatrolItem = (props) => {
   const groupInfo = {
     group_guards: groupMember,
   };
+  const mintInfo = {
+    to: "0xbbB6C6a0EdFFfCb44E5c050BDf45DA03a71B62dE",
+    uri: "https://nftstorage.link/ipfs/bafybeif57nrcpxihfjqt4yna7ozjdus5nyrfuv7hm457xjvfhl465smff4/anniversary.png",
+    name: "10회 달성",
+    description: "순찰10회달성",
+  };
+  const mintTokenInfo = {
+    to: guardInfo.guard_ether_address,
+    amount: "10",
+  };
   const handleStatusChange = async () => {
+    handleLoadingTimer(15000);
     const result = await GroupAPI.countGroup(countInfo);
     if (result) {
       const count = await GroupAPI.countGroupGuards(groupInfo);
-      console.log("result:", count);
+      if (count === 200) {
+        const result = await GroupAPI.getGuardDetail(guardInfo.guard_id);
+        const mintToken = await MintAPI.mintToken(mintTokenInfo);
+        console.log("PTK 토큰 발급: ", mintToken);
+        if (result.guard_count_patrol === 10) {
+          const mint = await MintAPI.mintNFT(mintInfo);
+          console.log("순찰 10회 기념 NFT 발급: ", mint);
+        }
+      }
     }
     await setGroupInfo();
+    await getGuardInfo();
   };
   /* Render */
   return (
